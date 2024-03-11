@@ -31,7 +31,7 @@ enum CBDDetailsRequestBuilder {
     
     // compose the NetworkRequest
     func createRequest(endPoint: CategoryDetailsEndPoints) -> NetworkRequest {
-        var headers: Headers = [:]
+        var headers: [String: String] = [:]
 
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
