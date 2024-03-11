@@ -30,7 +30,7 @@ extension CategoryContainerViewModel {
             switch event {
             case .getSections(let categoryID, let subcategoryId):
                 self?.bind(to: self?.sectionsViewModel ?? SectionsViewModel())
-                self?.sectionsUseCaseInput.send(.getSections(categoryID: categoryID, subCategoryId: subcategoryId, baseUrl: Environment.UAT.serviceBaseUrl, isGuestUser: isGuestUser))
+                self?.sectionsUseCaseInput.send(.getSections(categoryID: categoryID, subCategoryId: subcategoryId, baseUrl: AppCommonMethods.serviceBaseUrl, isGuestUser: AppCommonMethods.isGuestUser))
             }
         }.store(in: &cancellables)
         return output.eraseToAnyPublisher()
