@@ -8,7 +8,7 @@
 
 import Foundation
 import NetworkingLayer
-
+import SmilesUtilities
 
 // if you wish you can have multiple services like this in a project
 enum CBDDetailsRequestBuilder {
@@ -30,14 +30,14 @@ enum CBDDetailsRequestBuilder {
     }
     
     // compose the NetworkRequest
-    func createRequest(environment: Environment? = .UAT, endPoint: CategoryDetailsEndPoints) -> NetworkRequest {
+    func createRequest(endPoint: CategoryDetailsEndPoints) -> NetworkRequest {
         var headers: Headers = [:]
 
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         headers["CUSTOM_HEADER"] = "pre_prod"
         
-        return NetworkRequest(url: getURL(from: environment, for: endPoint), headers: headers, reqBody: requestBody, httpMethod: httpMethod)
+        return NetworkRequest(url: getURL(for: endPoint), headers: headers, reqBody: requestBody, httpMethod: httpMethod)
     }
     
     // encodable request body for POST
@@ -49,8 +49,8 @@ enum CBDDetailsRequestBuilder {
     }
     
     // compose urls for each request
-    func getURL(from environment: Environment? = .UAT, for endPoint: CategoryDetailsEndPoints) -> String {
-        let baseUrl = environment?.serviceBaseUrl
+    func getURL(for endPoint: CategoryDetailsEndPoints) -> String {
+        let baseUrl = AppCommonMethods.serviceBaseUrl //environment?.serviceBaseUrl
         let endPoint = endPoint.serviceEndPoints
         
         switch self {

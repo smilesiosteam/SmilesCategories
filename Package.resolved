@@ -1,5 +1,5 @@
 {
-  "originHash" : "b331f319bef5206369a3a8aabce17883bfe8f8cf1de4a7c090fcff68c66b3456",
+  "originHash" : "37427e6788a1185ff9bc8cf06bbc1117ff56da1ea62b8acc46324eedc33be398",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -128,6 +128,15 @@
       }
     },
     {
+      "identity" : "smilesfilterandsort",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/smilesiosteam/SmilesFilterAndSort.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "efd9410d9f5e14495fd35cc41fe1f8f75b9eb9cc"
+      }
+    },
+    {
       "identity" : "smilesfontsmanager",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/smilesiosteam/SmilesFontsManager.git",
@@ -179,6 +188,15 @@
       "state" : {
         "branch" : "main",
         "revision" : "433bf5965963ce27fc1a78480ec3627cc3425e5c"
+      }
+    },
+    {
+      "identity" : "smilespersonalizationevent",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/smilesiosteam/SmilesPersonalizationEvent.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "464ac0e0ef5fbdff3b42adc144a5fae84a377e8f"
       }
     },
     {

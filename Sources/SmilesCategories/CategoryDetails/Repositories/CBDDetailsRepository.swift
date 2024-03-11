@@ -18,7 +18,7 @@ class CBDDetailsRepository: CBDDetailsServiceable {
     func getCBDDetails(request: GetCBDDetailsRequest) -> AnyPublisher<CBDDetailsResponseModel, NetworkingLayer.NetworkError> {
         let endPoint = CBDDetailsRequestBuilder.getCBDDetails(request: request)
         let request = endPoint.createRequest(
-            environment: self.environment,
+//            environment: self.environment,
             endPoint: self.endPoint
         )
         
@@ -27,13 +27,13 @@ class CBDDetailsRepository: CBDDetailsServiceable {
     
     
     private var networkRequest: Requestable
-    private var environment: Environment?
+//    private var environment: Environment?
     private var endPoint: CategoryDetailsEndPoints
 
   // inject this for testability
-    init(networkRequest: Requestable, environment: Environment? = .UAT, endPoint: CategoryDetailsEndPoints) {
+    init(networkRequest: Requestable, endPoint: CategoryDetailsEndPoints) {
         self.networkRequest = networkRequest
-        self.environment = environment
+//        self.environment = environment
         self.endPoint = endPoint
     }
 }

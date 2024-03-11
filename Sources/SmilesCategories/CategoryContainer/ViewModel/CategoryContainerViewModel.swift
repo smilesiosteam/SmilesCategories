@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import SmilesSharedServices
+import SmilesUtilities
 
 class CategoryContainerViewModel {
     
