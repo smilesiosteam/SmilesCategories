@@ -15,6 +15,7 @@ import SmilesBanners
 import SmilesPersonalizationEvent
 import SmilesSharedServices
 import SmilesLoader
+import UIKit
 
 // MARK: - UITableViewDelegate
 extension CategoryDetailsViewController: UITableViewDelegate {
