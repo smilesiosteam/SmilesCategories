@@ -915,7 +915,7 @@ extension CategoryDetailsViewController: SelectedFiltersDelegate {
 
 extension CategoryDetailsViewController: SelectedSortDelegate {
     func didSetSort(sortBy: FilterDO) {
-        viewModel.setSelectedSortingParam(sort: sortBy)
+//        viewModel.setSelectedSortingParam(sort: sortBy)
         
         let sortName = sortBy.filterValue
         let sortIndex = Int(sortBy.filterKey ?? "0") ?? 0

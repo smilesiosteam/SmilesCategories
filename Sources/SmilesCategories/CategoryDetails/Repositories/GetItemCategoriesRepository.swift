@@ -23,7 +23,7 @@ class GetItemCategoriesRepository: GetItemCategoriesServiceable {
 
   // inject this for testability
     init(networkRequest: Requestable, endPoint: DashboardRevampEndPoints) {
-//        self.networkRequest = networkRequest
+        self.networkRequest = networkRequest
         self.endPoint = endPoint
     }
   

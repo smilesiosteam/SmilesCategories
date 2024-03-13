@@ -37,8 +37,8 @@ extension CategoryDetailsViewController: UITableViewDelegate {
                 if let offer = (self.dataSource?.dataSources?[safe: indexPath.section] as? TableViewDataSource<OfferDO>)?.models?[safe: indexPath.row] {
                     
                     if offer.recommendationModelType == .offer {
-                        let analyticsSmiles = AnalyticsSmiles(service: FirebaseAnalyticsService())
-                        analyticsSmiles.sendAnalyticTracker(trackerData: Tracker(eventType: AnalyticsEvent.firebaseEvent(.ClickOnOffer).name, parameters: [:]))
+//                        let analyticsSmiles = AnalyticsSmiles(service: FirebaseAnalyticsService())
+//                        analyticsSmiles.sendAnalyticTracker(trackerData: Tracker(eventType: AnalyticsEvent.firebaseEvent(.ClickOnOffer).name, parameters: [:]))
                         
                         if let isFromViewAll = self.isFromViewAll, isFromViewAll {
                             PersonalizationEventHandler.shared.registerPersonalizationEvent(eventName: "dfy_view_all_clicked", offerId: offer.offerId.asStringOrEmpty(), recommendationModelEvent: offer.recommendationModelEvent.asStringOrEmpty(), source: self.personalizationEventSource)
@@ -80,8 +80,8 @@ extension CategoryDetailsViewController: UITableViewDelegate {
                 }
             case .OFFERLISTING:
                 if let offer = (self.dataSource?.dataSources?[safe: indexPath.section] as? TableViewDataSource<OfferDO>)?.models?[safe: indexPath.row] {
-                    let analyticsSmiles = AnalyticsSmiles(service: FirebaseAnalyticsService())
-                    analyticsSmiles.sendAnalyticTracker(trackerData: Tracker(eventType: AnalyticsEvent.firebaseEvent(.ClickOnOffer).name, parameters: [:]))
+//                    let analyticsSmiles = AnalyticsSmiles(service: FirebaseAnalyticsService())
+//                    analyticsSmiles.sendAnalyticTracker(trackerData: Tracker(eventType: AnalyticsEvent.firebaseEvent(.ClickOnOffer).name, parameters: [:]))
                     
                     if let eventName = self.categoryDetailsSections?.getEventName(for: SectionIdentifier.OFFERLISTING.rawValue), !eventName.isEmpty {
                         PersonalizationEventHandler.shared.registerPersonalizationEvent(eventName: eventName, offerId: offer.offerId.asStringOrEmpty(), recommendationModelEvent: offer.recommendationModelEvent.asStringOrEmpty(), source: self.personalizationEventSource)
@@ -250,10 +250,10 @@ extension CategoryDetailsViewController: UITableViewDelegate {
                 }
                 
             case .GAMIFICATIONBANNER:
-                if let dataSource  = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<SpinWheelTurnsViewRevampCellModel>) {
-                    showHide(isDummy: dataSource.isDummy)
-                }
-                
+//                if let dataSource  = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<SpinWheelTurnsViewRevampCellModel>) {
+//                    showHide(isDummy: dataSource.isDummy)
+//                }
+                break
             case .TOPCUISINE:
                 if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<GetCuisinesResponseModel>){
                     showHide(isDummy: dataSource.isDummy)

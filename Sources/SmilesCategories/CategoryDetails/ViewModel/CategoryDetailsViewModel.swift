@@ -586,41 +586,41 @@ extension CategoryDetailsViewModel {
 
 // MARK: - Filters Delegate
 
-extension CategoryDetailsViewModel: RestaurantFiltersDelegate {
-    func didReturnRestaurantFilters(_ restaurantFilters: [RestaurantRequestWithNameFilter]) {
-        
-        self.filtersSavedList = []
-        
-        self.filtersSavedList = restaurantFilters
-        
-        var restaurantFiltersObjects = [RestaurantRequestFilter]()
-        for filter in restaurantFilters {
-            let restaurantRequestFilter = RestaurantRequestFilter()
-            restaurantRequestFilter.filterKey = filter.filterKey
-            restaurantRequestFilter.filterValue = filter.filterValue
-            restaurantFiltersObjects.append(restaurantRequestFilter)
-        }
-       
-        self.output.send(.fetchSavedFiltersAfterSuccess(filtersSavedList: self.filtersSavedList ?? []))
-//        self.output.send(.emptyRestaurantListDidSucceed)
-//        self.restaurantListUseCaseInput.send(.getRestaurantList(pageNo: 0, filtersList: restaurantFiltersObjects))
-    }
-}
+//extension CategoryDetailsViewModel: RestaurantFiltersDelegate {
+//    func didReturnRestaurantFilters(_ restaurantFilters: [RestaurantRequestWithNameFilter]) {
+//        
+//        self.filtersSavedList = []
+//        
+//        self.filtersSavedList = restaurantFilters
+//        
+//        var restaurantFiltersObjects = [RestaurantRequestFilter]()
+//        for filter in restaurantFilters {
+//            let restaurantRequestFilter = RestaurantRequestFilter()
+//            restaurantRequestFilter.filterKey = filter.filterKey
+//            restaurantRequestFilter.filterValue = filter.filterValue
+//            restaurantFiltersObjects.append(restaurantRequestFilter)
+//        }
+//       
+//        self.output.send(.fetchSavedFiltersAfterSuccess(filtersSavedList: self.filtersSavedList ?? []))
+////        self.output.send(.emptyRestaurantListDidSucceed)
+////        self.restaurantListUseCaseInput.send(.getRestaurantList(pageNo: 0, filtersList: restaurantFiltersObjects))
+//    }
+//}
 
 // MARK: - Sorting Delegate
 
-extension CategoryDetailsViewModel: RestaurantSortingChoicesDelegate {
-    func didReturnSortParam(_ sortBy: FilterDO) {
-        setSelectedSortingParam(sort: sortBy)
-    }
-    
-    func setSelectedSortingParam(sort: FilterDO) {
-        selectedSortingTableViewCellModel = sort
-                
-//        let restaurantRequestFilter = RestaurantRequestFilter()
-//        restaurantRequestFilter.filterKey = sort.filterKey
-//        restaurantRequestFilter.filterValue = sort.filterValue
-//        self.output.send(.emptyRestaurantListDidSucceed)
-//        self.restaurantListUseCaseInput.send(.getRestaurantList(pageNo: 0, filtersList: [restaurantRequestFilter]))
-    }
-}
+//extension CategoryDetailsViewModel: RestaurantSortingChoicesDelegate {
+//    func didReturnSortParam(_ sortBy: FilterDO) {
+//        setSelectedSortingParam(sort: sortBy)
+//    }
+//    
+//    func setSelectedSortingParam(sort: FilterDO) {
+//        selectedSortingTableViewCellModel = sort
+//                
+////        let restaurantRequestFilter = RestaurantRequestFilter()
+////        restaurantRequestFilter.filterKey = sort.filterKey
+////        restaurantRequestFilter.filterValue = sort.filterValue
+////        self.output.send(.emptyRestaurantListDidSucceed)
+////        self.restaurantListUseCaseInput.send(.getRestaurantList(pageNo: 0, filtersList: [restaurantRequestFilter]))
+//    }
+//}
