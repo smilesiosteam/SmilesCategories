@@ -1,5 +1,5 @@
 {
-  "originHash" : "37427e6788a1185ff9bc8cf06bbc1117ff56da1ea62b8acc46324eedc33be398",
+  "originHash" : "e2861bacbf98e74bfa6fba5e545f182b1aa57dea21c080dc60944f81b00e2df9",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -233,6 +233,15 @@
       "state" : {
         "branch" : "main",
         "revision" : "fb68d5ab40481d32086fe457cae97b1316942f72"
+      }
+    },
+    {
+      "identity" : "swifttheme",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wxxsw/SwiftTheme.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "f6a5442da8527f88e5b61b42131c003bd2d56803"
       }
     }
   ],

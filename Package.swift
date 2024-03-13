@@ -22,7 +22,9 @@ let package = Package(
         .package(url: "https://github.com/smilesiosteam/SmilesOffers.git", branch: "main"),
         .package(url: "https://github.com/smilesiosteam/SmilesBanners.git", branch: "main"),
         .package(url: "https://github.com/smilesiosteam/SmilesFilterAndSort.git", branch: "main"),
+        .package(url: "https://github.com/wxxsw/SwiftTheme.git", branch: "master"),
         .package(url: "https://github.com/smilesiosteam/SmilesPersonalizationEvent.git", branch: "main")
+        
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -36,6 +38,7 @@ let package = Package(
                 .product(name: "SmilesOffers", package: "SmilesOffers"),
                 .product(name: "SmilesBanners", package: "SmilesBanners"),
                 .product(name: "SmilesFilterAndSort", package: "SmilesFilterAndSort"),
+                .product(name: "SwiftTheme", package: "SwiftTheme"),
                 .product(name: "SmilesPersonalizationEvent", package: "SmilesPersonalizationEvent")
                 
                ]),
