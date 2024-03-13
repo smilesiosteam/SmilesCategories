@@ -9,6 +9,7 @@
 import Foundation
 import SmilesUtilities
 import SmilesOffers
+import UIKit
 
 enum SortingChoice: Int {
     case SingleSelection
