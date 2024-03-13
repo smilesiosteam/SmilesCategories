@@ -69,7 +69,7 @@ extension CategoryDetailsViewModel {
                 
             case .getTopOffers(let menuItemType, let bannerType, let categoryId, let bannerSubType):
                 self?.bind(to: self?.topOffersViewModel ?? TopOffersViewModel())
-                self?.topOffersUseCaseInput.send(.getTopOffers(menuItemType: menuItemType, bannerType: bannerType, categoryId: categoryId, bannerSubType: bannerSubType, isGuestUser: isGuestUser, baseUrl: AppCommonMethods.serviceBaseUrl))
+                self?.topOffersUseCaseInput.send(.getTopOffers(menuItemType: menuItemType, bannerType: bannerType, categoryId: categoryId, bannerSubType: bannerSubType, isGuestUser: AppCommonMethods.isGuestUser, baseUrl: AppCommonMethods.serviceBaseUrl))
                 
             case .getTopBrands(let categoryID, let menuItemType):
                 self?.bind(to: self?.topBrandsViewModel ?? TopBrandsViewModel())
@@ -85,10 +85,10 @@ extension CategoryDetailsViewModel {
                 
             case .getSections(let categoryID, let subCategoryId):
                 self?.bind(to: self?.sectionsViewModel ?? SectionsViewModel())
-                self?.sectionsUseCaseInput.send(.getSections(categoryID: categoryID, subCategoryId: subCategoryId, baseUrl: Environment.UAT.serviceBaseUrl, isGuestUser: isGuestUser))
+                self?.sectionsUseCaseInput.send(.getSections(categoryID: categoryID, subCategoryId: subCategoryId, baseUrl: AppCommonMethods.serviceBaseUrl, isGuestUser: AppCommonMethods.isGuestUser))
                 
             case .getStories(let categoryID):
-                SmilesStoriesHandler.shared.getStories(categoryId: categoryID, baseURL: Environment.UAT.serviceBaseUrl, isGuestUser: isGuestUser) { storiesResponse in
+                SmilesStoriesHandler.shared.getStories(categoryId: categoryID, baseURL: AppCommonMethods.serviceBaseUrl, isGuestUser: AppCommonMethods.isGuestUser) { storiesResponse in
                     self?.output.send(.fetchStoriesDidSucceed(response: storiesResponse))
                 } failure: { error in
                     self?.output.send(.fetchDidFail(error: error))
