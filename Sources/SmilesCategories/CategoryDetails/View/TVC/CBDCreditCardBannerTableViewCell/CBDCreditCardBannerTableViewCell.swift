@@ -10,6 +10,7 @@ import UIKit
 import SmilesUtilities
 import SmilesLanguageManager
 
+
 @objc class CBDCreditCardBannerTableViewCell: SuperTableViewCell {
     
     @IBOutlet weak var img_icon: UIImageView!
@@ -24,9 +25,9 @@ import SmilesLanguageManager
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        lbl_knowMore.text = LanguageManager.sharedInstance()?.getLocalizedString(forKey: "KnowMore")
+        lbl_knowMore.text = LanguageManager.shared.getLocalizedString(forKey: "KnowMore")
         lbl_knowMore.textColor = UIColor.appRedColor
-        CommonMethods.applyLocalizedStrings(toAllViews: self)
+        CommonMethods.applyLocalizedStrings(self)
     }
     
     func configure(details:CBDDetailsResponseModel){
@@ -35,7 +36,7 @@ import SmilesLanguageManager
         self.img_icon.setImageWithUrlString(details.cbdCard?.promotionalIcon.asStringOrEmpty() ?? "", defaultImage: "")
     }
     
-    @objc func setUpCell(data : CBDDetailsResponse){
+     func setUpCell(data : CBDDetailsResponseModel){
         
         if let cbdCard = data.cbdCard{
             self.lbl_title.text = cbdCard.promotionalTitle.asStringOrEmpty()
@@ -53,14 +54,14 @@ import SmilesLanguageManager
     override func updateCell(rowModel: BaseRowModel) {
         super.updateCell(rowModel: rowModel)
         //populate Cell here...
-        if let data = rowModel.rowValue as? CBDDetailsResponse {
-            self.lbl_title.text = data.cbdCard.promotionalTitle.asStringOrEmpty()
-            self.lbl_subtitle.text = data.cbdCard.promotionalDesc.asStringOrEmpty()
-            self.img_icon.setImageWithUrlString(data.cbdCard.promotionalIcon.asStringOrEmpty(), defaultImage: "")
+        if let data = rowModel.rowValue as? CBDDetailsResponseModel {
+            self.lbl_title.text = data.cbdCard?.promotionalTitle.asStringOrEmpty()
+            self.lbl_subtitle.text = data.cbdCard?.promotionalDesc.asStringOrEmpty()
+            self.img_icon.setImageWithUrlString(data.cbdCard?.promotionalIcon.asStringOrEmpty() ?? "", defaultImage: "")
         }
     }
     
-    class func rowModel(model:CBDDetailsResponse) -> BaseRowModel {
+    class func rowModel(model:CBDDetailsResponseModel) -> BaseRowModel {
         let rowModel = BaseRowModel()
         rowModel.rowCellIdentifier = "CBDCreditCardBannerTableViewCell"
         rowModel.rowHeight = 175.0
