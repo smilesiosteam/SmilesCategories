@@ -88,7 +88,7 @@ class CategoryContainerViewController: UIViewController, SmilesCoordinatorBoard 
     
     private func setupHeaderView() {
         topHeaderView.delegate = self
-        topHeaderView.setupHeaderView(backgroundColor: .appRevampFilterCountBGColor.withAlphaComponent(0.1), searchBarColor: .white, pointsViewColor: .black.withAlphaComponent(0.1), titleColor: .black, headerTitle: self.headerTitle.asStringOrEmpty(), showHeaderNavigaton: true, topCurveShouldAdd: (shouldAddBillsController ? false : true), haveSearchBorder: true, isGuestUser: isGuestUser)
+        topHeaderView.setupHeaderView(backgroundColor: .appRevampFilterCountBGColor.withAlphaComponent(0.1), searchBarColor: .white, pointsViewColor: .black.withAlphaComponent(0.1), titleColor: .black, headerTitle: self.headerTitle.asStringOrEmpty(), showHeaderNavigaton: true, topCurveShouldAdd: (shouldAddBillsController ? false : true), haveSearchBorder: true, isGuestUser: AppCommonMethods.isGuestUser)
         
         if shouldAddBillsController {
             topHeaderView.setBottomSegment(title1: "PayBill".localizedString, icon1: UIImage(named: "payBillIcon"), title2: "FindOffers".localizedString, icon2: UIImage(named: "findOffersIcon"), shouldShowSegment: true, isPayBillsView: isPayBillsView)
@@ -117,24 +117,24 @@ class CategoryContainerViewController: UIViewController, SmilesCoordinatorBoard 
             if index == 0 {
                 self.input.send(.getSections(categoryID: categoryId, subCategoryId: subCategoryId))
             } else {
-                self.categoryContainerCoordinator?.navigateToCategoryDetails(isFromViewAll: self.isFromViewAll, personalizationEventSource: self.personalizationEventSource, didScroll: { [weak self] scrollView in
-                    self?.adjustTopHeader(scrollView)
-                })
+//                self.categoryContainerCoordinator?.navigateToCategoryDetails(isFromViewAll: self.isFromViewAll, personalizationEventSource: self.personalizationEventSource, didScroll: { [weak self] scrollView in
+//                    self?.adjustTopHeader(scrollView)
+//                })
                 
-                if let childViewController = self.getChild(viewController: BillPayRevampViewController.self) {
-                    self.removeChild(asChildViewController: childViewController)
-                }
+//                if let childViewController = self.getChild(viewController: BillPayRevampViewController.self) {
+//                    self.removeChild(asChildViewController: childViewController)
+//                }
             }
         } else {
-            if let themeId = categoryContainerCoordinator?.themeId {
-                self.categoryContainerCoordinator?.navigateToCategoryDetails(isFromViewAll: self.isFromViewAll, personalizationEventSource: self.personalizationEventSource, themeId: themeId,didScroll: { [weak self] scrollView in
-                    self?.adjustTopHeader(scrollView)
-                })
-                } else {
-                    self.categoryContainerCoordinator?.navigateToCategoryDetails(isFromViewAll: self.isFromViewAll, personalizationEventSource: self.personalizationEventSource, didScroll: { [weak self] scrollView in
-                        self?.adjustTopHeader(scrollView)
-                    })
-                }
+//            if let themeId = categoryContainerCoordinator?.themeId {
+//                self.categoryContainerCoordinator?.navigateToCategoryDetails(isFromViewAll: self.isFromViewAll, personalizationEventSource: self.personalizationEventSource, themeId: themeId,didScroll: { [weak self] scrollView in
+//                    self?.adjustTopHeader(scrollView)
+//                })
+//                } else {
+//                    self.categoryContainerCoordinator?.navigateToCategoryDetails(isFromViewAll: self.isFromViewAll, personalizationEventSource: self.personalizationEventSource, didScroll: { [weak self] scrollView in
+//                        self?.adjustTopHeader(scrollView)
+//                    })
+//                }
         }
     }
     
@@ -161,7 +161,7 @@ class CategoryContainerViewController: UIViewController, SmilesCoordinatorBoard 
         }
     }
     
-    fileprivate func setPersonalizationEventSource() {
+    func setPersonalizationEventSource() {
         if let source = SharedConstants.personalizationEventSource {
             self.personalizationEventSource = source
             SharedConstants.personalizationEventSource = nil
@@ -215,11 +215,11 @@ extension CategoryContainerViewController: AppHeaderDelegate {
     }
     
     func didTapOnSearch() {
-        self.categoryContainerCoordinator?.navigateToGlobalSearchVC()
+//        self.categoryContainerCoordinator?.navigateToGlobalSearchVC()
     }
     
     func didTapOnLocation() {
-        self.categoryContainerCoordinator?.navigateToUpdateLocationVC()
+//        self.categoryContainerCoordinator?.navigateToUpdateLocationVC()
     }
     
     func setLocationToolTipPositionView(view: UIImageView) {
@@ -237,6 +237,6 @@ extension CategoryContainerViewController: AppHeaderDelegate {
     }
     
     func rewardPointsBtnTapped() {
-        self.categoryContainerCoordinator?.navigateToTransactionsListViewController(personalizationEventSource: self.personalizationEventSource)
+//        self.categoryContainerCoordinator?.navigateToTransactionsListViewController(personalizationEventSource: self.personalizationEventSource)
     }
 }
