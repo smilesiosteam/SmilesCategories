@@ -18,7 +18,7 @@ struct DashboardCellRegistration: CellRegisterable {
         // Register extra cells for home here
         tableView.registerCellFromNib(SubscriptionPromotionActionTableViewCell.self, withIdentifier: String(describing: SubscriptionPromotionActionTableViewCell.self))
         tableView.registerCellFromNib(ItemCategoryTableViewCell.self, withIdentifier: String(describing: ItemCategoryTableViewCell.self))
-        tableView.registerCellFromNib(ActionNeededTableViewCell.self, withIdentifier: String(describing: ActionNeededTableViewCell.self))
+//        tableView.registerCellFromNib(ActionNeededTableViewCell.self, withIdentifier: String(describing: ActionNeededTableViewCell.self))
         tableView.registerCellFromNib(CBDCreditCardBannerTableViewCell.self, withIdentifier: String(describing: CBDCreditCardBannerTableViewCell.self))
         tableView.registerCellFromNib(OcassionThemeCell.self, withIdentifier: String(describing: OcassionThemeCell.self))
     }

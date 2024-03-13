@@ -8,6 +8,7 @@
 
 import Foundation
 import NetworkingLayer
+import SmilesUtilities
 
 
 // if you wish you can have multiple services like this in a project
@@ -30,14 +31,14 @@ enum PopularRestaurantsRequestBuilder {
     }
     
     // compose the NetworkRequest
-    func createRequest(environment: Environment? = .UAT, endPoint: FoodOrderHomeEndPoints) -> NetworkRequest {
-        var headers: Headers = [:]
+    func createRequest(endPoint: FoodOrderHomeEndPoints) -> NetworkRequest {
+        var headers: [String: String] = [:]
 
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         headers["CUSTOM_HEADER"] = "pre_prod"
         
-        return NetworkRequest(url: getURL(from: environment, for: endPoint), headers: headers, reqBody: requestBody, httpMethod: httpMethod)
+        return NetworkRequest(url: getURL(for: endPoint), headers: headers, reqBody: requestBody, httpMethod: httpMethod)
     }
     
     // encodable request body for POST
@@ -49,13 +50,13 @@ enum PopularRestaurantsRequestBuilder {
     }
     
     // compose urls for each request
-    func getURL(from environment: Environment? = .UAT, for endPoint: FoodOrderHomeEndPoints) -> String {
-        let baseUrl = environment?.serviceBaseUrl
+    func getURL(for endPoint: FoodOrderHomeEndPoints) -> String {
+        let baseUrl = AppCommonMethods.serviceBaseUrl
         let endPoint = endPoint.serviceEndPoints
         
         switch self {
         case .getPopularRestaurants:
-            return "\(baseUrl ?? "")\(endPoint)"
+            return "\(baseUrl)\(endPoint)"
         }
     }
 }
