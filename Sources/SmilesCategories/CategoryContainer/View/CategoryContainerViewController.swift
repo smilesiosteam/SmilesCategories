@@ -27,7 +27,7 @@ class CategoryContainerViewController: UIViewController, SmilesCoordinatorBoard 
     var subCategoryId: Int?
     var shouldAddBillsController: Bool = false
     
-    var categoryContainerCoordinator: CategoryContainerCoordinator?
+    //var categoryContainerCoordinator: CategoryContainerCoordinator?
     
     var backToRootView: Bool?
     var headerTitle: String?
@@ -58,7 +58,7 @@ class CategoryContainerViewController: UIViewController, SmilesCoordinatorBoard 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupHeaderView()
-        UIApplication.delegte().currentPresentedViewController = self
+//        UIApplication.delegte().currentPresentedViewController = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -103,11 +103,11 @@ class CategoryContainerViewController: UIViewController, SmilesCoordinatorBoard 
     }
     
     func displayRewardPoints() {
-        if let rewardPoints = SwiftUtli.shared.getValueFromUserDefaults(key: .rewardPoints) as? Int {
+        if let rewardPoints = SmilesCategoriesUtli.shared.getValueFromUserDefaults(key: .rewardPoints) as? Int {
             self.topHeaderView.setPointsOfUser(with: rewardPoints.numberWithCommas())
         }
         
-        if let rewardPointsIcon = SwiftUtli.shared.getValueFromUserDefaults(key: .rewardPointsIcon) as? String {
+        if let rewardPointsIcon = SmilesCategoriesUtli.shared.getValueFromUserDefaults(key: .rewardPointsIcon) as? String {
             self.topHeaderView.setPointsIcon(with: rewardPointsIcon, shouldShowAnimation: false)
         }
     }
@@ -188,7 +188,7 @@ extension CategoryContainerViewController {
             topHeaderView.setSearchText(with: searchTag)
         }
         
-        self.categoryContainerCoordinator?.navigateToBillPayRevamp(personalizationEventSource: self.personalizationEventSource)
+//        self.categoryContainerCoordinator?.navigateToBillPayRevamp(personalizationEventSource: self.personalizationEventSource)
         
         if let childViewController = self.getChild(viewController: CategoryDetailsViewController.self) {
             self.removeChild(asChildViewController: childViewController)

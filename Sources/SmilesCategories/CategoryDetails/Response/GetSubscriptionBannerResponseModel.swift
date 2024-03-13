@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SmilesUtilities
 
 struct GetSubscriptionBannerResponseModel: Codable {
             

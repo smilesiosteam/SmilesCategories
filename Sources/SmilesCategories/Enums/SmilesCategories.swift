@@ -4,6 +4,9 @@
 public enum SortingCategoriesTypes : Int {
     case discount = 111, cashVoucher = 222, dealVoucher = 333
 }
+public enum OfferType : String, Codable {
+    case discount = "Discount", voucher = "Voucher", dealVoucher = "Deal Voucher", etisalat = "Etisalat Bundle"
+}
 
 
 import Foundation
@@ -30,4 +33,29 @@ enum SectionIdentifier: String, SectionIdentifierProtocol {
     case RESTAURANTLISTING = "RESTAURANT_LISTING"
     case SUBSCRIPTIONBANNERSV2 = "SUBSCRIPTION_BANNERS_V2"
     case THEME_SECTION = "THEME_SECTION"
+}
+
+
+class SmilesCategoriesUtli {
+    static let shared = SmilesCategoriesUtli()
+    
+    func saveOnUserDefaultWithValue(_ value : Any, key : String) {
+        let userDefaults = UserDefaults.standard
+        userDefaults.setValue(value, forKey: key)
+        userDefaults.synchronize()
+    }
+    
+    func getValueFromUserDefaults(key : String) -> Any? {
+        let userDefaults = UserDefaults.standard
+        if let value = userDefaults.value(forKey: key){
+            return value
+        }
+        else{
+            return nil
+        }
+    }
+    
+    func removeFromUserDefaults(key : String)  {
+        UserDefaults.standard.removeObject(forKey: key)
+    }
 }
