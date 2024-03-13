@@ -41,7 +41,7 @@ extension DashboardSubscriptionViewModel {
             switch event {
             case .getSubscriptionBanner(let menuItemType, let bannerType, let categoryId, let bannerSubType):
                 self?.bind(to: self?.topOffersViewModel ?? TopOffersViewModel())
-                self?.topOffersUseCaseInput.send(.getTopOffers(menuItemType: menuItemType, bannerType: bannerType, categoryId: categoryId, bannerSubType: bannerSubType, isGuestUser: isGuestUser, baseUrl: AppCommonMethods.serviceBaseUrl))
+                self?.topOffersUseCaseInput.send(.getTopOffers(menuItemType: menuItemType, bannerType: bannerType, categoryId: categoryId, bannerSubType: bannerSubType, isGuestUser: AppCommonMethods.isGuestUser, baseUrl: AppCommonMethods.serviceBaseUrl))
 //            case .getSubscriptionV2Banner(let menuItemType, let bannerType, let categoryId, let bannerSubType):
 //                self?.getAllSubscriptionBanners(for: menuItemType, bannerType: bannerType, categoryId: categoryId, bannerSubType: nil,isBannerTwo: true)
             }
