@@ -8,6 +8,7 @@
 
 import Foundation
 import SmilesUtilities
+import UIKit
 
 struct DashboardCellRegistration: CellRegisterable {
     func register(for tableView: UITableView) {
