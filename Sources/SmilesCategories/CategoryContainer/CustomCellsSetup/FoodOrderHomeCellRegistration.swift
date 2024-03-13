@@ -12,6 +12,7 @@ import SmilesOffers
 import SmilesBanners
 import SmilesStoriesManager
 import SmilesFilterAndSort
+import UIKit
 
 struct FoodOrderHomeCellRegistration: CellRegisterable {
     
@@ -33,10 +34,7 @@ struct FoodOrderHomeCellRegistration: CellRegisterable {
         
         tableView.registerCellFromNib(DeliveryAndPickupTableViewCell.self, withIdentifier: String(describing: DeliveryAndPickupTableViewCell.self))
         
-        tableView.registerCellFromNib(OrderAgainTableViewCellRevamp.self, withIdentifier: String(describing: OrderAgainTableViewCellRevamp.self))
-        
-        tableView.registerCellFromNib(FiltersTableViewCell.self, withIdentifier: String(describing: FiltersTableViewCell.self), bundle: FiltersTableViewCell.module)
-        
+    
         tableView.registerCellFromNib(SubscriptionTableViewCell.self, withIdentifier: String(describing: SubscriptionTableViewCell.self))
         tableView.registerCellFromNib(SubscriptionPromotionActionTableViewCell.self, withIdentifier: String(describing: SubscriptionPromotionActionTableViewCell.self))
         

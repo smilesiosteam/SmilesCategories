@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import NetworkingLayer
+import SmilesUtilities
 
 class CuisinesViewModel: NSObject {
     
@@ -46,7 +47,7 @@ extension CuisinesViewModel {
         let getCuisinesRequest = GetCuisinesRequestModel(
             categoryId: categoryID,
             menuItemType: menuItemType,
-            isGuestUser: isGuestUser
+            isGuestUser: AppCommonMethods.isGuestUser
         )
         
         let service = GetCuisinesRepository(

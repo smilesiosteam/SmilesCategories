@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import NetworkingLayer
+import SmilesUtilities
 
 class ItemCategoriesViewModel: NSObject {
     
@@ -40,7 +41,7 @@ extension ItemCategoriesViewModel {
     }
     
     func getItemCategories() {
-        let itemCategoriesRequest = ItemCategoriesRequestModel(isGuestUser: isGuestUser)
+        let itemCategoriesRequest = ItemCategoriesRequestModel(isGuestUser: AppCommonMethods.isGuestUser)
         
         let service = GetItemCategoriesRepository(
             networkRequest: NetworkingLayerRequestable(requestTimeOut: 60),

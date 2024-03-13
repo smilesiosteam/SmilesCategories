@@ -10,6 +10,7 @@ import Foundation
 import Combine
 import NetworkingLayer
 import CoreLocation
+import SmilesUtilities
 
 class NearbyOffersViewModel: NSObject {
     
@@ -42,7 +43,7 @@ extension NearbyOffersViewModel {
     
     func getNearbyOffers(with pageNo: Int?) {
         
-        let nearbyOffersRequest = NearbyOffersRequestModel(pageNo: pageNo, operationName: "/home/v1/deals-for-you", isGuestUser: isGuestUser)
+        let nearbyOffersRequest = NearbyOffersRequestModel(pageNo: pageNo, operationName: "/home/v1/deals-for-you", isGuestUser: AppCommonMethods.isGuestUser)
         
         let service = GetNearbyOffersRepository(
             networkRequest: NetworkingLayerRequestable(requestTimeOut: 60),

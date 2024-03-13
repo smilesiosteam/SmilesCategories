@@ -79,7 +79,7 @@ extension PopularRestaurantsViewModel {
 
         let getPopularRestaurantsRequest = GetPopularRestaurantsRequestModel(
             menuItemType: menuItemType,
-            isGuestUser: isGuestUser,
+            isGuestUser: AppCommonMethods.isGuestUser,
             type: type
         )
         
