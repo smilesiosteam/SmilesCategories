@@ -25,9 +25,9 @@ import SmilesLanguageManager
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        lbl_knowMore.text = LanguageManager.shared.getLocalizedString(forKey: "KnowMore")
+        lbl_knowMore.text =  "KnowMore".localizedString
         lbl_knowMore.textColor = UIColor.appRedColor
-        CommonMethods.applyLocalizedStrings(self)
+        lbl_knowMore.semanticContentAttribute =  AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
     }
     
     func configure(details:CBDDetailsResponseModel){

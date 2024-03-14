@@ -58,7 +58,7 @@ class FoodHeaderNib: UIView {
         mainView.frame = bounds
         
         mainView.bindFrameToSuperviewBounds()
-        CommonMethods.applyLocalizedStrings(self)
+        //CommonMethods.applyLocalizedStrings(self)
         
         viewAllTitleLabel.text = "ViewAllText".localizedString
         if AppCommonMethods.languageIsArabic() {
