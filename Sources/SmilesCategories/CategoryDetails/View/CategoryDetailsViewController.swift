@@ -49,8 +49,6 @@ class CategoryDetailsViewController: UIViewController, SmilesCoordinatorBoard {
     var lastSortCriteria: String?
     var arraySelectedSubCategoryTypes: [String] = []
     
-//    weak var categoryDetailsCoordinator: CategoryDetailsCoordinator? // Child Coordinator handling
-    
     private var selectedIndexPath: IndexPath?
     private var offerFavoriteOperation = 0 // Operation 1 = add and Operation 2 = remove
     
@@ -74,17 +72,18 @@ class CategoryDetailsViewController: UIViewController, SmilesCoordinatorBoard {
     var personalizationEventSource: String?
     
     var selectedSortIndex = -1
-//    var actionSheet: CustomizableActionSheet?
     var pageSheetView: PageSheetView!
     var redirectionURL: String?
     var consentActionType: ConsentActionType?
     
     var selectedFiltersResponse: Data?
     weak var delegate: SmilesCategoriesContainerDelegate?
+    private var dependencies: SmilesCategoryDetailsDependencies?
     
     init(dependencies: SmilesCategoryDetailsDependencies) {
         super.init(nibName: nil, bundle: nil)
-        delegate = dependencies.deelegate
+        self.dependencies = dependencies
+        delegate = dependencies.delegate
     }
     
     required init?(coder: NSCoder) {
@@ -113,7 +112,7 @@ class CategoryDetailsViewController: UIViewController, SmilesCoordinatorBoard {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        UIApplication.delegte().currentPresentedViewController = self
+        delegate?.currentPresentedViewController(viewController: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -171,13 +170,13 @@ class CategoryDetailsViewController: UIViewController, SmilesCoordinatorBoard {
                     
                     // Popular Restaurants Success
                 case .fetchPopularRestaurantsDidSucceed(let popularRestaurantsResponse, let menuItemType): break
-//                    if menuItemType == nil {
-////                        self?.categoryDetailsCoordinator?.presentRestaurantsList(response: popularRestaurantsResponse, onRestaurantPicked: { restaurant in
-////                            self?.categoryDetailsCoordinator?.navigateToRestaurantDetailVC(restaurant: restaurant, isViewCart: false, recommendationModelEvent: "", personalizationEventSource: self?.personalizationEventSource)
-//                        })
-//                    } else {
-//                        self?.configurePopularRestaurantsData(with: popularRestaurantsResponse)
-//                    }
+                    //                    if menuItemType == nil {
+                    ////                        self?.categoryDetailsCoordinator?.presentRestaurantsList(response: popularRestaurantsResponse, onRestaurantPicked: { restaurant in
+                    ////                            self?.categoryDetailsCoordinator?.navigateToRestaurantDetailVC(restaurant: restaurant, isViewCart: false, recommendationModelEvent: "", personalizationEventSource: self?.personalizationEventSource)
+                    //                        })
+                    //                    } else {
+                    //                        self?.configurePopularRestaurantsData(with: popularRestaurantsResponse)
+                    //                    }
                     
                     // Filters Data Binding
                 case .fetchOffersFiltersDidSucceed(let offersFiltersResponse):
@@ -349,7 +348,7 @@ class CategoryDetailsViewController: UIViewController, SmilesCoordinatorBoard {
                     self.input.send(.getSubscriptionBanner(menuItemType: nil, bannerType: "HOME", categoryId: nil, bannerSubType: "SUBSCRIPTION_BANNERS_V2"))
                 case .OFFERLISTING:
                     showShimmer(identifier: .OFFERLISTING)
-                        self.input.send(.getOffersCategoryList(pageNo: 1, categoryId: "\(self.offersCategoryId)", searchByLocation: false, sortingType: sortingType, subCategoryTypeIdsList: arraySelectedSubCategoryTypes, themeId: (themeId != nil) ? "\(self.themeId!)" : nil))
+                    self.input.send(.getOffersCategoryList(pageNo: 1, categoryId: "\(self.offersCategoryId)", searchByLocation: false, sortingType: sortingType, subCategoryTypeIdsList: arraySelectedSubCategoryTypes, themeId: (themeId != nil) ? "\(self.themeId!)" : nil))
                     
                     self.input.send(.getSortingList)
                 case .CBDBANNER:
@@ -469,13 +468,11 @@ extension CategoryDetailsViewController {
                     }
                     
                     if let urlScheme = AppCommonMethods.getSchemeFromUrl(urlString: data.redirectionUrl), !urlScheme.contains("smiles") {
-//                        if let topBrandsConsent = GetConsentsResponseModel.sharedInstance.consentConfigList?.first(where: {$0.consentType == .topBrand}) {
-//                            
-//                            var title = topBrandsConsent.title
-//                            title = title?.replacingOccurrences(of: "$TOP_BRAND_NAME$", with: data.title.asStringOrEmpty())
-//                            
-//                            self?.popupInitiate(url: data.redirectionUrl, withConsentConfig: topBrandsConsent, consentActionType: .topBrand, updatedConsentTitle: title)
-//                        }
+                        if let topBrandsConsent = self?.dependencies?.consentConfigList?.first(where: {$0.consentType == .topBrand}) {
+                            self?.redirectionURL = data.redirectionUrl ?? ""
+                            self?.presentPageSheet(withConsentConfig: topBrandsConsent)
+                        }
+                        
                     } else {
                         self?.handleBannerDeepLinkRedirections(url: data.redirectionUrl.asStringOrEmpty())
                     }
@@ -495,7 +492,7 @@ extension CategoryDetailsViewController {
                     if let eventName = self?.categoryDetailsSections?.getEventName(for: SectionIdentifier.TOPCOLLECTIONS.rawValue), !eventName.isEmpty {
                         PersonalizationEventHandler.shared.registerPersonalizationEvent(eventName: eventName, urlScheme: data.redirectionUrl.asStringOrEmpty(), offerId: data.id, source: self?.personalizationEventSource)
                     }
-                        self?.handleBannerDeepLinkRedirections(url: data.redirectionUrl.asStringOrEmpty())
+                    self?.handleBannerDeepLinkRedirections(url: data.redirectionUrl.asStringOrEmpty())
                 })
                 self.configureDataSource()
             }
@@ -510,7 +507,7 @@ extension CategoryDetailsViewController {
                 self.dataSource?.dataSources?[storiesIndex] = TableViewDataSource.make(forStories: storiesResponse, data: self.categoryDetailsSections?.sectionDetails?[storiesIndex].backgroundColor ?? "#FFFFFF", onClick: { [weak self] story in
                     if var stories = ((self?.dataSource?.dataSources?[safe: storiesIndex] as? TableViewDataSource<Stories>)?.models)?.first {
                         self?.delegate?.smilesCategoriesAnalytics(event: .ClickOnStory, parameters: [:])
-
+                        
                         if let eventName = self?.categoryDetailsSections?.getEventName(for: SectionIdentifier.STORIES.rawValue), !eventName.isEmpty {
                             PersonalizationEventHandler.shared.registerPersonalizationEvent(eventName: eventName, offerId: story.storyID.asStringOrEmpty(), source: self?.personalizationEventSource)
                         }
@@ -623,10 +620,7 @@ extension CategoryDetailsViewController {
                     if !AppCommonMethods.isGuestUser {
                         self?.updateOfferWishlistStatus(isFavorite: isFavorite, offerId: offerId)
                     } else {
-//                        let guestVC = GuestUserLoginPopupRouter.setupModule()
-//                        guestVC.prevNavigation = self?.navigationController
-//                        guestVC.modalPresentationStyle = .overFullScreen
-//                        self?.navigationController?.present(guestVC, animated: true)
+                        self?.delegate?.showGuestUserLoginPopUp()
                     }
                 }
                 self.configureDataSource()
@@ -678,10 +672,7 @@ extension CategoryDetailsViewController {
                     if !AppCommonMethods.isGuestUser {
                         self?.updateOfferWishlistStatus(isFavorite: isFavorite, offerId: offerId)
                     } else {
-//                        let guestVC = GuestUserLoginPopupRouter.setupModule()
-//                        guestVC.prevNavigation = self?.navigationController
-//                        guestVC.modalPresentationStyle = .overFullScreen
-//                        self?.navigationController?.present(guestVC, animated: true)
+                        self?.delegate?.showGuestUserLoginPopUp()
                     }
                 }
                 self.configureDataSource()
@@ -802,28 +793,6 @@ extension CategoryDetailsViewController {
         }
     }
     
-//    func popupInitiate(url: String?, withConsentConfig consent: ConsentConfigDO?, consentActionType: ConsentActionType?, updatedConsentTitle: String? = nil) {
-//        self.redirectionURL = url
-//        self.consentActionType = consentActionType
-//        
-//        let title = updatedConsentTitle ?? consent?.title.asStringOrEmpty()
-//        let subtitle = consent?.description ?? ""
-//        let rightButtonTitle = consent?.buttonRightText ?? ""
-//        let leftButtonTitle = consent?.buttonLeftText ?? ""
-//
-//        var height: CGFloat = 230
-//        if let url = url, url.contains("servicemarket") && consentActionType != .topBrand {
-//            height = 163
-//        }
-//        
-//        let actionSheetItems = ActionSheetPresenter.createActionSheetForSwitchView(title: title.asStringOrEmpty(), subtitle: subtitle, leftButton: leftButtonTitle, rightButton: rightButtonTitle, delegate: self, height: height)
-//        
-//        actionSheet = actionSheetItems.0
-//        actionSheet?.showInView((UIApplication.shared.delegate as! AppDelegate).tabbarViewController?.view ?? view, items: actionSheetItems.1, closeBlock: {
-//            
-//            self.consentActionType = nil
-//        })
-//    }
 }
 
 // MARK: - Redirections
@@ -850,12 +819,12 @@ extension CategoryDetailsViewController {
     }
     
     func redirectToCollectionsDetail(collectionID: String, type: CollectionDetailsType, title: String?, subtitle: String?, headerTitle: String?) {
-
+        
     }
     
     func redirectToOfferDetail(offer: OfferDO, isFromDealsForYouSection: Bool) {
         delegate?.navigateToOfferDetail(offer: offer, isFromDealsForYouSection: isFromDealsForYouSection, personalizationEventSource: self.personalizationEventSource)
-
+        
     }
     
     func redirectToRestaurantDetail(offer: OfferDO) {
@@ -972,25 +941,6 @@ extension CategoryDetailsViewController {
 }
 
 // MARK: - ActionSheetButtonsDelegate
-//extension CategoryDetailsViewController: ActionSheetButtonsDelegate {
-//    func rightButtonTaapped() {
-//        actionSheet?.dismiss()
-//        
-//        if let consentActionType, consentActionType == .topBrand {
-//            AppCommonMethods.openExternalUrl(urlString: redirectionURL.asStringOrEmpty()) { [weak self] _ in
-//                guard let self else { return }
-//                self.consentActionType = nil
-//            }
-//        }
-//    }
-//    
-//    func leftButtonTaapped() {
-//        actionSheet?.dismiss()
-//        self.consentActionType = nil
-//    }
-//}
-
-
 extension CategoryDetailsViewController {
     
     func presentPageSheet(withConsentConfig consent: ConsentConfigDO?) {
@@ -1001,8 +951,6 @@ extension CategoryDetailsViewController {
         // Configure constraints for the pageSheetView
         activateConstraints(subView: pageSheetView, superView: view)
         pageSheetView.updateContainerHeight()
-        
-        
     }
 }
 
@@ -1010,10 +958,14 @@ extension CategoryDetailsViewController: PageSheetDelegate {
     
     func didSelectLeftButton() {
         pageSheetView.removeFromSuperview()
+        self.consentActionType = nil
     }
     
     func didSelectRightButton() {
-//        EasyInsuranceRouter.shared.openURLInBrowser(urlString: self.redirectionURL)
+        AppCommonMethods.openExternalUrl(urlString: redirectionURL.asStringOrEmpty()) { [weak self] _ in
+            guard let self else { return }
+            self.consentActionType = nil
+        }
         pageSheetView.removeFromSuperview()
     }
     

@@ -43,7 +43,8 @@ public struct SmilesCategoryContainerDependencies {
 
 public struct SmilesCategoryDetailsDependencies {
     
-    let deelegate: SmilesCategoriesContainerDelegate?
+    let delegate: SmilesCategoriesContainerDelegate?
+    var consentConfigList : [ConsentConfigDO]?
     var categoryId: Int?
     var themeId: Int?
     var subCategoryId: Int?
@@ -70,6 +71,9 @@ public protocol SmilesCategoriesContainerDelegate: AnyObject {
     func navigateToFiltersVC(categoryId: Int, sortingType: String?, previousFiltersResponse: Data?, selectedFilters: [FilterValue]?, filterDelegate: SelectedFiltersDelegate?)
     func navigateToSortingVC(sorts: [FilterDO], delegate: SelectedSortDelegate)
     func handleBannerDeepLinkRedirections(url: String)
+    
+    func showGuestUserLoginPopUp()
+    func currentPresentedViewController(viewController: UIViewController)
 
 }
 
