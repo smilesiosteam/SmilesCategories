@@ -25,7 +25,7 @@ public struct CategoriesConfigurator {
  
 public struct SmilesCategoryContainerDependencies {
     
-    let deelegate: SmilesCategoriesDelegate?
+    let deelegate: SmilesCategoriesContainerDelegate?
     let categoryId: Int 
     let shouldShowBills: Bool
     let sortType: String
@@ -34,7 +34,7 @@ public struct SmilesCategoryContainerDependencies {
     let isFromSummary: Bool = false
 }
 
-public protocol SmilesCategoriesDelegate: AnyObject {
+public protocol SmilesCategoriesContainerDelegate: AnyObject {
     func smilesCategoriesAnalytics(event: EventType, parameters: [String: String]?)
     func navigateToGlobalSearchVC()
     func navigateToUpdateLocationVC()
