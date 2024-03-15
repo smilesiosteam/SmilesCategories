@@ -41,7 +41,18 @@ class CategoryContainerViewController: UIViewController, SmilesCoordinatorBoard 
     var isPayBillsView = true
     var didLoadView: ((UIView) -> Void)?
     
+    weak var delegate: SmilesCategoriesDelegate?
+    
     // MARK: -- View LifeCycle
+    
+    init(dependencies: SmilesCategoryContainerDependencies) {
+        super.init(nibName: CategoryContainerViewController.className, bundle: Bundle.module)
+        delegate = dependencies.deelegate
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
