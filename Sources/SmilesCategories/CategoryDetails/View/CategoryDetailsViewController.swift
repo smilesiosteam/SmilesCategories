@@ -8,7 +8,6 @@
 
 import UIKit
 import Combine
-import AnalyticsSmiles
 import SmilesStoriesManager
 import SmilesUtilities
 import SmilesSharedServices
@@ -81,6 +80,16 @@ class CategoryDetailsViewController: UIViewController, SmilesCoordinatorBoard {
     var consentActionType: ConsentActionType?
     
     var selectedFiltersResponse: Data?
+    weak var delegate: SmilesCategoriesContainerDelegate?
+    
+    init(dependencies: SmilesCategoryDetailsDependencies) {
+        super.init(nibName: nil, bundle: nil)
+        delegate = dependencies.deelegate
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: -- View LifeCycle
     
@@ -454,9 +463,7 @@ extension CategoryDetailsViewController {
         if let brands = topBrandsResponse.brands, !brands.isEmpty {
             if let topBrandsIndex = getSectionIndex(for: .TOPBRANDS) {
                 self.dataSource?.dataSources?[topBrandsIndex] = TableViewDataSource.make(forBrands: topBrandsResponse, data: self.categoryDetailsSections?.sectionDetails?[topBrandsIndex].backgroundColor ?? "#FFFFFF", topBrandsType: .foodOrder, completion: { [weak self] data in
-//                    let analyticsSmiles = AnalyticsSmiles(service: FirebaseAnalyticsService())
-//                    analyticsSmiles.sendAnalyticTracker(trackerData: Tracker(eventType: AnalyticsEvent.firebaseEvent(.ClickOnTopBrands).name, parameters: [:]))
-                    
+                    self?.delegate?.smilesCategoriesAnalytics(event: .ClickOnTopBrands, parameters: [:])
                     if let eventName = self?.categoryDetailsSections?.getEventName(for: SectionIdentifier.TOPBRANDS.rawValue), !eventName.isEmpty {
                         PersonalizationEventHandler.shared.registerPersonalizationEvent(eventName: eventName, urlScheme: data.redirectionUrl.asStringOrEmpty(), offerId: data.id, source: self?.personalizationEventSource)
                     }
@@ -502,9 +509,8 @@ extension CategoryDetailsViewController {
             if let storiesIndex = getSectionIndex(for: .STORIES) {
                 self.dataSource?.dataSources?[storiesIndex] = TableViewDataSource.make(forStories: storiesResponse, data: self.categoryDetailsSections?.sectionDetails?[storiesIndex].backgroundColor ?? "#FFFFFF", onClick: { [weak self] story in
                     if var stories = ((self?.dataSource?.dataSources?[safe: storiesIndex] as? TableViewDataSource<Stories>)?.models)?.first {
-//                        let analyticsSmiles = AnalyticsSmiles(service: FirebaseAnalyticsService())
-//                        analyticsSmiles.sendAnalyticTracker(trackerData: Tracker(eventType: AnalyticsEvent.firebaseEvent(.ClickOnStory).name, parameters: [:]))
-                        
+                        self?.delegate?.smilesCategoriesAnalytics(event: .ClickOnStory, parameters: [:])
+
                         if let eventName = self?.categoryDetailsSections?.getEventName(for: SectionIdentifier.STORIES.rawValue), !eventName.isEmpty {
                             PersonalizationEventHandler.shared.registerPersonalizationEvent(eventName: eventName, offerId: story.storyID.asStringOrEmpty(), source: self?.personalizationEventSource)
                         }
@@ -824,38 +830,38 @@ extension CategoryDetailsViewController {
 extension CategoryDetailsViewController {
     
     func redirectToRestaurantDetailController(restaurant: Restaurant, isViewCart: Bool = false) {
-//        self.categoryDetailsCoordinator?.navigateToRestaurantDetailVC(restaurant: restaurant, isViewCart: isViewCart, recommendationModelEvent: restaurant.recommendationModelEvent, personalizationEventSource: self.personalizationEventSource)
+        delegate?.navigateToRestaurantDetailVC(restaurant: restaurant, isViewCart: isViewCart, recommendationModelEvent: restaurant.recommendationModelEvent, personalizationEventSource: self.personalizationEventSource)
     }
     
     func handleBannerDeepLinkRedirections(url: String) {
-//        HouseConfig.handleBannerDeepLinkRedirections(url, with: navigationController, additionalInfo: nil)
+        delegate?.handleBannerDeepLinkRedirections(url: url)
     }
     
     func openStories(stories: [Story], storyIndex:Int, favouriteUpdatedCallback: ((_ storyIndex:Int,_ snapIndex:Int,_ isFavourite:Bool) -> Void)? = nil) {
-//        self.categoryDetailsCoordinator?.navigateToStoriesDetailVC(stories: stories, storyIndex: storyIndex, favouriteUpdatedCallback: favouriteUpdatedCallback)
+        delegate?.navigateToStoriesDetailVC(stories: stories, storyIndex: storyIndex, favouriteUpdatedCallback: favouriteUpdatedCallback)
     }
     
     func redirectToSearch() {
-        //        self.categoryDetailsCoordinator?.navigateToGlobalSearchVC()
+        delegate?.navigateToGlobalSearchVC()
     }
     
     func presentCategoriesPicker(groups:[GroupItemCategoryDetails]){
-//        self.categoryDetailsCoordinator?.presentCategoryPicker(groups: groups)
+        delegate?.presentCategoryPicker(groups: groups)
     }
     
     func redirectToCollectionsDetail(collectionID: String, type: CollectionDetailsType, title: String?, subtitle: String?, headerTitle: String?) {
-//                self.categoryDetailsCoordinator?.navigateToCollectionsDetail(collectionID: collectionID, type: type, title: title, subtitle: subtitle, headerTitle: headerTitle)
+
     }
     
     func redirectToOfferDetail(offer: OfferDO, isFromDealsForYouSection: Bool) {
-//        self.categoryDetailsCoordinator?.navigateToOfferDetail(offer: offer, isFromDealsForYouSection: isFromDealsForYouSection, personalizationEventSource: self.personalizationEventSource)
+        delegate?.navigateToOfferDetail(offer: offer, isFromDealsForYouSection: isFromDealsForYouSection, personalizationEventSource: self.personalizationEventSource)
+
     }
     
     func redirectToRestaurantDetail(offer: OfferDO) {
         let restaurantObj = Restaurant()
         restaurantObj.restaurantId = offer.offerId
-        
-//        self.categoryDetailsCoordinator?.navigateToRestaurantDetailVC(restaurant: restaurantObj, isViewCart: false, recommendationModelEvent: offer.recommendationModelEvent, personalizationEventSource: self.personalizationEventSource)
+        delegate?.navigateToRestaurantDetailVC(restaurant: restaurantObj, isViewCart: false, recommendationModelEvent: offer.recommendationModelEvent, personalizationEventSource: self.personalizationEventSource)
     }
     
     func redirectToOffersFilters() {
@@ -863,15 +869,13 @@ extension CategoryDetailsViewController {
         if selectedFilters.isEmpty {
             selectedFiltersResponse = nil
         }
-        
-//        categoryDetailsCoordinator?.navigateToFiltersVC(categoryId: categoryId, sortingType: sortingType, previousFiltersResponse: selectedFiltersResponse, selectedFilters: selectedFilters, filterDelegate: self)
+        delegate?.navigateToFiltersVC(categoryId: categoryId, sortingType: sortingType, previousFiltersResponse: selectedFiltersResponse, selectedFilters: selectedFilters, filterDelegate: self)
     }
     
     func redirectToSortingPopUp() {
         guard let sortData = AppCommonMethods.getLocalizedArray(forKey: "ViewAllSortCriteria") as? [String] else { return }
         let sorts = viewModel.mapSortObjects(sorts: sortData)
-        
-//        categoryDetailsCoordinator?.navigateToSortingVC(sorts: sorts, delegate: self)
+        delegate?.navigateToSortingVC(sorts: sorts, delegate: self)
     }
 }
 
