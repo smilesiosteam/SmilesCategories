@@ -41,7 +41,6 @@ let package = Package(
                 .product(name: "SmilesBanners", package: "SmilesBanners"),
                 .product(name: "SmilesFilterAndSort", package: "SmilesFilterAndSort"),
                 .product(name: "SwiftTheme", package: "SwiftTheme"),
-                .product(name: "AnalyticsSmiles", package: "SmilesAnalytics"),
                 .product(name: "SmilesReusableComponents", package: "SmilesReusableComponents"),
                 .product(name: "SmilesPersonalizationEvent", package: "SmilesPersonalizationEvent")
                 

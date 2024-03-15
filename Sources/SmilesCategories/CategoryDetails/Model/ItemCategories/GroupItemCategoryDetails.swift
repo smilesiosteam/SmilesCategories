@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct GroupItemCategoryDetails: Codable {
+public struct GroupItemCategoryDetails: Codable {
     let groupId: Int?
     let groupName: String?
     let groupDesc: String?
@@ -19,7 +19,7 @@ struct GroupItemCategoryDetails: Codable {
         case groupId, groupName, groupDesc, iconUrl, itemCategoriesDetails
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         groupId = try values.decodeIfPresent(Int.self, forKey: .groupId)
         groupName = try values.decodeIfPresent(String.self, forKey: .groupName)
