@@ -36,6 +36,10 @@ public struct SmilesCategoryContainerDependencies {
 
 public protocol SmilesCategoriesDelegate: AnyObject {
     func smilesCategoriesAnalytics(event: EventType, parameters: [String: String]?)
+    func navigateToGlobalSearchVC()
+    func navigateToUpdateLocationVC()
+    func navigateToTransactionsListViewController(personalizationEventSource: String?)
+    func navigateToBillPayRevamp(personalizationEventSource: String?)
 }
 
 public enum EventType {

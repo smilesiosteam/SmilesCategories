@@ -199,7 +199,9 @@ extension CategoryContainerViewController {
         if let searchTag = topPlaceHolderResponse?.searchTag {
             topHeaderView.setSearchText(with: searchTag)
         }
-        
+        if let delegate {
+            delegate.navigateToBillPayRevamp(personalizationEventSource: self.personalizationEventSource)
+        }
 //        self.categoryContainerCoordinator?.navigateToBillPayRevamp(personalizationEventSource: self.personalizationEventSource)
         
         if let childViewController = self.getChild(viewController: CategoryDetailsViewController.self) {
@@ -227,10 +229,16 @@ extension CategoryContainerViewController: AppHeaderDelegate {
     }
     
     func didTapOnSearch() {
+        if let delegate {
+            delegate.navigateToGlobalSearchVC()
+        }
 //        self.categoryContainerCoordinator?.navigateToGlobalSearchVC()
     }
     
     func didTapOnLocation() {
+        if let delegate {
+            delegate.navigateToUpdateLocationVC()
+        }
 //        self.categoryContainerCoordinator?.navigateToUpdateLocationVC()
     }
     
@@ -249,6 +257,9 @@ extension CategoryContainerViewController: AppHeaderDelegate {
     }
     
     func rewardPointsBtnTapped() {
+        if let delegate {
+            delegate.navigateToTransactionsListViewController(personalizationEventSource: self.personalizationEventSource)
+        }
 //        self.categoryContainerCoordinator?.navigateToTransactionsListViewController(personalizationEventSource: self.personalizationEventSource)
     }
 }
