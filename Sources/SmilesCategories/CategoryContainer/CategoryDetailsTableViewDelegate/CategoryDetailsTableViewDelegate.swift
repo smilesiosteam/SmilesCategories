@@ -16,6 +16,8 @@ import SmilesPersonalizationEvent
 import SmilesSharedServices
 import SmilesLoader
 import UIKit
+import SmilesReusableComponents
+
 
 // MARK: - UITableViewDelegate
 extension CategoryDetailsViewController: UITableViewDelegate {

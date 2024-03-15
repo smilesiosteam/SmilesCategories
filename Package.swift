@@ -24,6 +24,7 @@ let package = Package(
         .package(url: "https://github.com/smilesiosteam/SmilesFilterAndSort.git", branch: "main"),
         .package(url: "https://github.com/smilesiosteam/SmilesAnalytics.git", branch: "main"),
         .package(url: "https://github.com/wxxsw/SwiftTheme.git", branch: "master"),
+        .package(url: "https://github.com/smilesiosteam/SmilesReusableComponents.git", branch: "main"),
         .package(url: "https://github.com/smilesiosteam/SmilesPersonalizationEvent.git", branch: "main")
         
     ],
@@ -41,6 +42,7 @@ let package = Package(
                 .product(name: "SmilesFilterAndSort", package: "SmilesFilterAndSort"),
                 .product(name: "SwiftTheme", package: "SwiftTheme"),
                 .product(name: "AnalyticsSmiles", package: "SmilesAnalytics"),
+                .product(name: "SmilesReusableComponents", package: "SmilesReusableComponents"),
                 .product(name: "SmilesPersonalizationEvent", package: "SmilesPersonalizationEvent")
                 
                ]),

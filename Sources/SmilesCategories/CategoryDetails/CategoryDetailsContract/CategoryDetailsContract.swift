@@ -13,6 +13,7 @@ import SmilesSharedServices
 import SmilesUtilities
 import SmilesOffers
 import SmilesBanners
+import SmilesReusableComponents
 
 extension CategoryDetailsViewModel {
     // MARK: - INPUT. View event methods

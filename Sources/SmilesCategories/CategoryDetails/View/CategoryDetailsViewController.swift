@@ -17,6 +17,7 @@ import SmilesBanners
 import SmilesPersonalizationEvent
 import SmilesLoader
 import SmilesFilterAndSort
+import SmilesReusableComponents
 
 enum OfferSort: String, CaseIterable {
     case discount = "Discounts"
@@ -75,6 +76,7 @@ class CategoryDetailsViewController: UIViewController, SmilesCoordinatorBoard {
     
     var selectedSortIndex = -1
 //    var actionSheet: CustomizableActionSheet?
+    var pageSheetView: PageSheetView!
     var redirectionURL: String?
     var consentActionType: ConsentActionType?
     
@@ -915,7 +917,7 @@ extension CategoryDetailsViewController: SelectedFiltersDelegate {
 
 extension CategoryDetailsViewController: SelectedSortDelegate {
     func didSetSort(sortBy: FilterDO) {
-//        viewModel.setSelectedSortingParam(sort: sortBy)
+        viewModel.setSelectedSortingParam(sort: sortBy)
         
         let sortName = sortBy.filterValue
         let sortIndex = Int(sortBy.filterKey ?? "0") ?? 0
@@ -983,6 +985,37 @@ extension CategoryDetailsViewController {
 //        self.consentActionType = nil
 //    }
 //}
+
+
+extension CategoryDetailsViewController {
+    
+    func presentPageSheet(withConsentConfig consent: ConsentConfigDO?) {
+        
+        pageSheetView = PageSheetView(delegate: self, pageSheetModel: consent)
+        pageSheetView.translatesAutoresizingMaskIntoConstraints = false
+        self.tabBarController?.view.addSubview(pageSheetView)
+        // Configure constraints for the pageSheetView
+        activateConstraints(subView: pageSheetView, superView: view)
+        pageSheetView.updateContainerHeight()
+        
+        
+    }
+}
+
+extension CategoryDetailsViewController: PageSheetDelegate {
+    
+    func didSelectLeftButton() {
+        pageSheetView.removeFromSuperview()
+    }
+    
+    func didSelectRightButton() {
+//        EasyInsuranceRouter.shared.openURLInBrowser(urlString: self.redirectionURL)
+        pageSheetView.removeFromSuperview()
+    }
+    
+}
+
+
 @objc enum CollectionDetailsType: Int {
     case collection = 0
     case brands = 1

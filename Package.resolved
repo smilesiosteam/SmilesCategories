@@ -1,5 +1,5 @@
 {
-  "originHash" : "e2861bacbf98e74bfa6fba5e545f182b1aa57dea21c080dc60944f81b00e2df9",
+  "originHash" : "a43f4f64a3da6ac6eec5e3a192de1adab9a32dad97b3b2bb88fcbe47c4bc0d3d",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -200,6 +200,15 @@
       }
     },
     {
+      "identity" : "smilesreusablecomponents",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/smilesiosteam/SmilesReusableComponents.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "94faf980800c1bf0b5eebeadaaeb5b2e7c023e67"
+      }
+    },
+    {
       "identity" : "smilessharedservices",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/smilesiosteam/SmilesSharedServices.git",
@@ -232,7 +241,7 @@
       "location" : "https://github.com/smilesiosteam/SmilesUtilities.git",
       "state" : {
         "branch" : "main",
-        "revision" : "fb68d5ab40481d32086fe457cae97b1316942f72"
+        "revision" : "a79a685f07c4f0b761d3afe808c53cba63a05355"
       }
     },
     {
