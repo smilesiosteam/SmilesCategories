@@ -9,7 +9,7 @@
 import Foundation
 import SmilesUtilities
 
-struct GetPopularRestaurantsResponseModel: Codable {
+public struct GetPopularRestaurantsResponseModel: Codable {
     var restaurants: [Restaurant]?
     var isLastPageReached: Bool?
     var sectionName: String?
@@ -24,7 +24,7 @@ struct GetPopularRestaurantsResponseModel: Codable {
         case eventName
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
         restaurants = try values.decodeIfPresent([Restaurant].self, forKey: .restaurants)

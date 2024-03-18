@@ -32,36 +32,65 @@ public struct CategoriesConfigurator {
  
 public struct SmilesCategoryContainerDependencies {
     
-    let deelegate: SmilesCategoriesDelegate?
-    let categoryId: Int 
-    let shouldShowBills: Bool
-    let sortType: String
-    let isFromViewAll: Bool
-    let isFromGifting: Bool = false
-    let isFromSummary: Bool = false
+    public weak var delegate: SmilesCategoriesContainerDelegate?
+    public let categoryId: Int?
+    public let themeId: Int?
+    public let subCategoryId: Int?
+    public let shouldAddBillsController: Bool?
+    public let isFromViewAll: Bool?
+    public let isFromGifting: Bool?
+    public let isFromSummary: Bool?
+    
+    public init(delegate: SmilesCategoriesContainerDelegate? = nil, categoryId: Int?, themeId: Int?, subCategoryId: Int?, shouldAddBillsController: Bool?, isFromViewAll: Bool?, isFromGifting: Bool? = false, isFromSummary: Bool? = false) {
+        self.delegate = delegate
+        self.categoryId = categoryId
+        self.themeId = themeId
+        self.subCategoryId = subCategoryId
+        self.shouldAddBillsController = shouldAddBillsController
+        self.isFromViewAll = isFromViewAll
+        self.isFromGifting = isFromGifting
+        self.isFromSummary = isFromSummary
+    }
 }
 
 public struct SmilesCategoryDetailsDependencies {
     
-    let delegate: SmilesCategoriesDelegate?
-    var consentConfigList : [ConsentConfigDO]?
-    var categoryId: Int?
-    var themeId: Int?
-    var subCategoryId: Int?
-    var sortType: String?
-    var didScroll: (UIScrollView) -> Void = { _ in }
-    var isFromViewAll: Bool?
-    var personalizationEventSource: String?
+    public weak var delegate: SmilesCategoriesDelegate?
+    public var consentConfigList : [ConsentConfigDO]?
+    public var categoryId: Int?
+    public var themeId: Int?
+    public var subCategoryId: Int?
+    public var sortType: String?
+    public var didScroll: (UIScrollView) -> Void = { _ in }
+    public var isFromViewAll: Bool?
+    public var personalizationEventSource: String?
+    
+    public init(delegate: SmilesCategoriesDelegate? = nil, consentConfigList: [ConsentConfigDO]? = nil, categoryId: Int? = nil, themeId: Int? = nil, subCategoryId: Int? = nil, sortType: String? = nil, didScroll: @escaping (UIScrollView) -> Void, isFromViewAll: Bool? = nil, personalizationEventSource: String? = nil) {
+        self.delegate = delegate
+        self.consentConfigList = consentConfigList
+        self.categoryId = categoryId
+        self.themeId = themeId
+        self.subCategoryId = subCategoryId
+        self.sortType = sortType
+        self.didScroll = didScroll
+        self.isFromViewAll = isFromViewAll
+        self.personalizationEventSource = personalizationEventSource
+    }
 }
 
-public protocol SmilesCategoriesDelegate: AnyObject {
-    func smilesCategoriesAnalytics(event: EventType, parameters: [String: String]?)
+public protocol SmilesCategoriesContainerDelegate: AnyObject {
     func navigateToGlobalSearchVC()
     func navigateToUpdateLocationVC()
     func navigateToTransactionsListViewController(personalizationEventSource: String?)
     func navigateToBillPayRevamp(personalizationEventSource: String?)
-   
-    // Detail
+    func currentPresentedViewController(viewController: UIViewController)
+    func navigateToCategoryDetails(isFromViewAll: Bool?, personalizationEventSource: String?, themeId: Int? ,didScroll: @escaping (UIScrollView) -> Void)
+    func removeChild(viewController: UIViewController)
+}
+
+public protocol SmilesCategoriesDelegate: AnyObject {
+    func smilesCategoriesAnalytics(event: EventTypes, parameters: [String: String]?)
+    func presentRestaurantsList(response:GetPopularRestaurantsResponseModel, onRestaurantPicked:@escaping ((Restaurant)->Void))
     func navigateToRestaurantDetailVC(restaurant:Restaurant, isViewCart: Bool,
                                       recommendationModelEvent: String?, personalizationEventSource: String?)
     
@@ -77,7 +106,7 @@ public protocol SmilesCategoriesDelegate: AnyObject {
 
 }
 
-public enum EventType {
+public enum EventTypes {
     case ClickOnOffer
     case ClickOnTopBrands
     case ClickOnStory

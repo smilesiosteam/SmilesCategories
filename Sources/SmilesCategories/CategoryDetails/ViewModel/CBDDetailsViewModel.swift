@@ -11,14 +11,14 @@ import Combine
 import NetworkingLayer
 import CoreLocation
 
-class CBDDetailsViewModel: NSObject {
+public class CBDDetailsViewModel: NSObject {
     
     // MARK: - INPUT. View event methods
-    enum Input {
+    public enum Input {
         case getCBDDetails
     }
     
-    enum Output {
+    public enum Output {
         case fetchCBDDetailsDidSucceed(response: CBDDetailsResponseModel)
         case fetchCBDDetailsDidFail(error: Error)
     }
@@ -29,7 +29,7 @@ class CBDDetailsViewModel: NSObject {
 }
 
 extension CBDDetailsViewModel {
-    func transform(input: AnyPublisher<Input, Never>) -> AnyPublisher<Output, Never> {
+    public func transform(input: AnyPublisher<Input, Never>) -> AnyPublisher<Output, Never> {
         output = PassthroughSubject<Output, Never>()
         input.sink { [weak self] event in
             switch event {

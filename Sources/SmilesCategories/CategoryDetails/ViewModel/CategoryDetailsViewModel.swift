@@ -18,7 +18,7 @@ import SmilesFilterAndSort
 import SmilesReusableComponents
 
 
-class CategoryDetailsViewModel {
+public class CategoryDetailsViewModel {
     
     // MARK: -- Variables
     

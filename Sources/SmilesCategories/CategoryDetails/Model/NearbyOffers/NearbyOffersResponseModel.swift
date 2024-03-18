@@ -9,7 +9,7 @@
 import Foundation
 import SmilesOffers
 
-struct NearbyOffersResponseModel: Codable {
+public struct NearbyOffersResponseModel: Codable {
     let lifestyleSubscriberFlag: Bool?
     let umOffers: [OfferDO]?
     

@@ -15,10 +15,10 @@ import SmilesOffers
 import SmilesBanners
 import SmilesReusableComponents
 
-extension CategoryDetailsViewModel {
+public extension CategoryDetailsViewModel {
     // MARK: - INPUT. View event methods
     
-    enum Input {
+     enum Input {
         case getCuisines(categoryID: Int, menuItemType: String?)
         case getCBDDetails
         case getTopBrands(categoryID: Int, menuItemType: String?)

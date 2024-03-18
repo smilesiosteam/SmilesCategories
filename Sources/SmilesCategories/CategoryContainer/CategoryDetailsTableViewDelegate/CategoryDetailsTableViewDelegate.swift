@@ -20,7 +20,7 @@ import SmilesReusableComponents
 
 // MARK: - UITableViewDelegate
 extension CategoryDetailsViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let secID = SectionIdentifier(rawValue: self.categoryDetailsSections?.sectionDetails?[safe: indexPath.section]?.sectionIdentifier ?? ""){
             switch secID {
             case .TOPPLACEHOLDER:
@@ -98,7 +98,7 @@ extension CategoryDetailsViewController: UITableViewDelegate {
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         switch self.categoryDetailsSections?.sectionDetails?[safe: indexPath.section]?.sectionIdentifier {
         case SectionIdentifier.TOPPLACEHOLDER.rawValue:
@@ -118,11 +118,11 @@ extension CategoryDetailsViewController: UITableViewDelegate {
         }
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+    public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if !(self.sections.isEmpty){
             if let restaurantListingIndex = getSectionIndex(for: .OFFERLISTING), section != restaurantListingIndex {
                 if self.dataSource?.tableView(tableView, numberOfRowsInSection: section) == 0 {
@@ -140,7 +140,7 @@ extension CategoryDetailsViewController: UITableViewDelegate {
         return UITableView.automaticDimension
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if !(self.sections.isEmpty){
             if let restaurantListingIndex = getSectionIndex(for: .OFFERLISTING), section != restaurantListingIndex {
@@ -289,7 +289,7 @@ extension CategoryDetailsViewController: UITableViewDelegate {
         }
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let offersIndex = getSectionIndex(for: .OFFERLISTING) {
             if indexPath.section == offersIndex {
                 let lastItem = self.offers.endIndex - 1
@@ -314,7 +314,7 @@ extension CategoryDetailsViewController: UITableViewDelegate {
         }
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         didScroll(scrollView)
         if let indexPath = tableView.indexPath(for: tableView.visibleCells.first ?? UITableViewCell()) {
             let backgroundColor = self.categoryDetailsSections?.sectionDetails?[safe: indexPath.section]?.backgroundColor

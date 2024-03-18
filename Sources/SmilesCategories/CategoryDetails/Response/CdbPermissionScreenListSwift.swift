@@ -5,13 +5,13 @@
 
 import Foundation
 
-class CdbPermissionScreenListSwift: Codable {
-    let billAndRechargePage: Bool?
-    let cashVoucher: Bool?
-    let dealVoucher: Bool?
-    let discountVoucher: Bool?
-    let paymentPage: Bool?
-    let paymentSuccessfulPage: Bool?
+public class CdbPermissionScreenListSwift: Codable {
+    public let billAndRechargePage: Bool?
+    public let cashVoucher: Bool?
+    public let dealVoucher: Bool?
+    public let discountVoucher: Bool?
+    public let paymentPage: Bool?
+    public let paymentSuccessfulPage: Bool?
 
     enum CodingKeys: String, CodingKey {
         case billAndRechargePage
@@ -22,7 +22,7 @@ class CdbPermissionScreenListSwift: Codable {
         case paymentSuccessfulPage
     }
 
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         billAndRechargePage = try values.decodeIfPresent(Bool.self, forKey: .billAndRechargePage)
         cashVoucher = try values.decodeIfPresent(Bool.self, forKey: .cashVoucher)

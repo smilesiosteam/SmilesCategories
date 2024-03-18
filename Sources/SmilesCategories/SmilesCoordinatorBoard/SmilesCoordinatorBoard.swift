@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol SmilesCoordinatorBoard : UIViewController {
+public protocol SmilesCoordinatorBoard : UIViewController {
 
     static func instantiateFromStoryBoard(withStoryBoard name:String) -> Self
 
@@ -17,7 +17,7 @@ protocol SmilesCoordinatorBoard : UIViewController {
 
 extension SmilesCoordinatorBoard {
 
-    static func instantiateFromStoryBoard(withStoryBoard name:String) -> Self {
+    public static func instantiateFromStoryBoard(withStoryBoard name:String) -> Self {
         let storyboard = UIStoryboard(name: name, bundle: Bundle.main)
         let id = String(describing: self)
         return storyboard.instantiateViewController(withIdentifier: id) as! Self

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct OffersListDO: Codable {
+public struct OffersListDO: Codable {
     let categoryId : String?
     let categoryOrder : Int?
     let cinemaOfferFlag : Bool?

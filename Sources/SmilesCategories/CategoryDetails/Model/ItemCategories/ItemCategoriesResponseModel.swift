@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ItemCategoriesResponseModel: Codable {
+public struct ItemCategoriesResponseModel: Codable {
     var extTransactionId: String?
     var itemCategoriesDetails: [HomeItemCategoryDetails]?
     
@@ -21,7 +21,7 @@ struct ItemCategoriesResponseModel: Codable {
         
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         extTransactionId = try values.decodeIfPresent(String.self, forKey: .extTransactionId)
         itemCategoriesDetails = try values.decodeIfPresent([HomeItemCategoryDetails].self, forKey: .itemCategoriesDetails)

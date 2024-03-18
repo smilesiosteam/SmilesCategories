@@ -5,10 +5,10 @@
 
 import Foundation
 
-class CbdCardDetailsListSwift: Codable {
-    let desc: String?
-    let icon: String?
-    let title: String?
+public class CbdCardDetailsListSwift: Codable {
+    public let desc: String?
+    public let icon: String?
+    public let title: String?
 
     enum CodingKeys: String, CodingKey {
         case desc
@@ -16,7 +16,7 @@ class CbdCardDetailsListSwift: Codable {
         case title
     }
 
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         desc = try values.decodeIfPresent(String.self, forKey: .desc)
         icon = try values.decodeIfPresent(String.self, forKey: .icon)

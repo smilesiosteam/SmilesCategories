@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct GetCuisinesResponseModel: Codable {
+public struct GetCuisinesResponseModel: Codable {
     
     let cuisines: [CuisineDO]?
     

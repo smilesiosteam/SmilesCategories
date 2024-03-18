@@ -6,21 +6,21 @@
 import Foundation
 import NetworkingLayer
 
-class CBDDetailsResponseModel: BaseMainResponse {
-    let cbdCard: CbdCardSwift?
-    let cbdCardDetailsList: [CbdCardDetailsListSwift]?
-    let cdbPermissionScreenList: CdbPermissionScreenListSwift?
-    let contactNumber: String?
-    let dob: String?
-    let isCbdCardHolder: Bool?
-    let language: String?
-    let name: String?
-    let nationality: Int?
-    let email: String?
-    let type: String?
-    let userDetailSectionHidden: Bool?
-    let isExternalRedirectionPopup: Bool?
-    let cbdRedirectionUrl: String?
+public class CBDDetailsResponseModel: BaseMainResponse {
+    public let cbdCard: CbdCardSwift?
+    public let cbdCardDetailsList: [CbdCardDetailsListSwift]?
+    public let cdbPermissionScreenList: CdbPermissionScreenListSwift?
+    public let contactNumber: String?
+    public let dob: String?
+    public let isCbdCardHolder: Bool?
+    public let language: String?
+    public let name: String?
+    public let nationality: Int?
+    public let email: String?
+    public let type: String?
+    public let userDetailSectionHidden: Bool?
+    public let isExternalRedirectionPopup: Bool?
+    public let cbdRedirectionUrl: String?
     
     enum CodingKeys: String, CodingKey {
         case cbdCard
@@ -61,7 +61,7 @@ class CBDDetailsResponseModel: BaseMainResponse {
     /**
      * Returns all the available property values in the form of [String:Any] object where the key is the approperiate json key and the value is the value of the corresponding property
      */
-    func toDictionary() -> [String: Any] {
+    public func toDictionary() -> [String: Any] {
         var dictionary = [String: Any]()
         
         if userDetailSectionHidden != nil{

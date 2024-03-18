@@ -6,16 +6,16 @@
 import Foundation
 import SmilesUtilities
 
-class CbdCardSwift: Codable {
-    let desc: String?
-    let img: String?
-    let promotionalDesc: String?
-    let promotionalIcon: String?
-    let promotionalTitle: String?
-    let title: String?
-    let termsAndConditionTitle: String?
-    let termsAndCondition: String?
-    let cbdPromotionType : String?
+public class CbdCardSwift: Codable {
+    public let desc: String?
+    public let img: String?
+    public let promotionalDesc: String?
+    public let promotionalIcon: String?
+    public let promotionalTitle: String?
+    public let title: String?
+    public let termsAndConditionTitle: String?
+    public let termsAndCondition: String?
+    public let cbdPromotionType : String?
         
     enum CodingKeys: String, CodingKey {
         case desc
@@ -29,7 +29,7 @@ class CbdCardSwift: Codable {
         case cbdPromotionType
     }
 
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         desc = try values.decodeIfPresent(String.self, forKey: .desc)
         img = try values.decodeIfPresent(String.self, forKey: .img)

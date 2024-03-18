@@ -14,47 +14,50 @@ import SmilesUtilities
 import AppHeader
 
 
-class CategoryContainerViewController: UIViewController, SmilesCoordinatorBoard {
+public class CategoryContainerViewController: UIViewController, SmilesCoordinatorBoard {
     
-    @IBOutlet weak var topHeaderView: AppHeaderView!
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet public weak var topHeaderView: AppHeaderView!
+    @IBOutlet public weak var containerView: UIView!
     // MARK: -- Variables
     private let input: PassthroughSubject<CategoryContainerViewModel.Input, Never> = .init()
     private let viewModel = CategoryContainerViewModel()
     private var cancellables = Set<AnyCancellable>()
     
     var categoryId: Int = 0
-    var themeId: Int = 0
+    var themeId: Int?
     var subCategoryId: Int?
-    var shouldAddBillsController: Bool = false
-    
-    //var categoryContainerCoordinator: CategoryContainerCoordinator?
-    
+    public var shouldAddBillsController: Bool = false
     var backToRootView: Bool?
     var headerTitle: String?
     var isFromViewAll: Bool?
     var isFromGifting = false
     var isFromSummary = false
-
     var isHeaderExpanding = false
     var personalizationEventSource: String?
     var isPayBillsView = true
-    var didLoadView: ((UIView) -> Void)?
+    public var didLoadView: ((UIView) -> Void)?
     
-    weak var delegate: SmilesCategoriesDelegate?
+    weak var delegate: SmilesCategoriesContainerDelegate?
     
     // MARK: -- View LifeCycle
     
     init(dependencies: SmilesCategoryContainerDependencies) {
-        super.init(nibName: CategoryContainerViewController.className, bundle: Bundle.module)
-        delegate = dependencies.deelegate
+        super.init(nibName: nil, bundle: nil)
+        delegate = dependencies.delegate
+        categoryId = dependencies.categoryId ?? 0
+        themeId = dependencies.themeId
+        subCategoryId = dependencies.subCategoryId
+        shouldAddBillsController = dependencies.shouldAddBillsController ?? false
+        isFromViewAll = dependencies.isFromViewAll
+        isFromGifting = dependencies.isFromGifting ?? false
+        isFromSummary = dependencies.isFromSummary ?? false
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
 
         setPersonalizationEventSource()
@@ -62,18 +65,18 @@ class CategoryContainerViewController: UIViewController, SmilesCoordinatorBoard 
         updateView(index: 0)
     }
     
-    override func viewIsAppearing(_ animated: Bool) {
+    public override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
         didLoadView?(containerView)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupHeaderView()
-//        UIApplication.delegte().currentPresentedViewController = self
+        delegate?.currentPresentedViewController(viewController: self)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
@@ -129,24 +132,22 @@ class CategoryContainerViewController: UIViewController, SmilesCoordinatorBoard 
             if index == 0 {
                 self.input.send(.getSections(categoryID: categoryId, subCategoryId: subCategoryId))
             } else {
-//                self.categoryContainerCoordinator?.navigateToCategoryDetails(isFromViewAll: self.isFromViewAll, personalizationEventSource: self.personalizationEventSource, didScroll: { [weak self] scrollView in
-//                    self?.adjustTopHeader(scrollView)
-//                })
+                self.delegate?.navigateToCategoryDetails(isFromViewAll: self.isFromViewAll,
+                                                         personalizationEventSource: self.personalizationEventSource,
+                                                         themeId: nil,
+                                                         didScroll: { [weak self] scrollView in
+                    self?.adjustTopHeader(scrollView)
+                })
                 
-//                if let childViewController = self.getChild(viewController: BillPayRevampViewController.self) {
-//                    self.removeChild(asChildViewController: childViewController)
-//                }
+                self.delegate?.removeChild(viewController: self)
             }
         } else {
-//            if let themeId = categoryContainerCoordinator?.themeId {
-//                self.categoryContainerCoordinator?.navigateToCategoryDetails(isFromViewAll: self.isFromViewAll, personalizationEventSource: self.personalizationEventSource, themeId: themeId,didScroll: { [weak self] scrollView in
-//                    self?.adjustTopHeader(scrollView)
-//                })
-//                } else {
-//                    self.categoryContainerCoordinator?.navigateToCategoryDetails(isFromViewAll: self.isFromViewAll, personalizationEventSource: self.personalizationEventSource, didScroll: { [weak self] scrollView in
-//                        self?.adjustTopHeader(scrollView)
-//                    })
-//                }
+            self.delegate?.navigateToCategoryDetails(isFromViewAll: self.isFromViewAll,
+                                                     personalizationEventSource: self.personalizationEventSource,
+                                                     themeId: themeId,
+                                                     didScroll: { [weak self] scrollView in
+                self?.adjustTopHeader(scrollView)
+            })
         }
     }
     
@@ -202,8 +203,6 @@ extension CategoryContainerViewController {
         if let delegate {
             delegate.navigateToBillPayRevamp(personalizationEventSource: self.personalizationEventSource)
         }
-//        self.categoryContainerCoordinator?.navigateToBillPayRevamp(personalizationEventSource: self.personalizationEventSource)
-        
         if let childViewController = self.getChild(viewController: CategoryDetailsViewController.self) {
             self.removeChild(asChildViewController: childViewController)
         }
@@ -211,7 +210,7 @@ extension CategoryContainerViewController {
 }
 
 extension CategoryContainerViewController: AppHeaderDelegate {
-    func didTapOnBackButton() {
+    public func didTapOnBackButton() {
         if isFromGifting {
             tabBarController?.selectedIndex = 0
             navigationController?.popToRootViewController()
@@ -228,38 +227,35 @@ extension CategoryContainerViewController: AppHeaderDelegate {
         }
     }
     
-    func didTapOnSearch() {
+    public func didTapOnSearch() {
         if let delegate {
             delegate.navigateToGlobalSearchVC()
         }
-//        self.categoryContainerCoordinator?.navigateToGlobalSearchVC()
     }
     
-    func didTapOnLocation() {
+    public func didTapOnLocation() {
         if let delegate {
             delegate.navigateToUpdateLocationVC()
         }
-//        self.categoryContainerCoordinator?.navigateToUpdateLocationVC()
     }
     
     func setLocationToolTipPositionView(view: UIImageView) {
 //        self.locationToolTipPosition = view
     }
     
-    func segmentLeftBtnTapped(index: Int) {
+    public func segmentLeftBtnTapped(index: Int) {
         updateView(index: index)
         isPayBillsView = true
     }
     
-    func segmentRightBtnTapped(index: Int) {
+    public func segmentRightBtnTapped(index: Int) {
         updateView(index: index)
         isPayBillsView = false
     }
     
-    func rewardPointsBtnTapped() {
+    public func rewardPointsBtnTapped() {
         if let delegate {
             delegate.navigateToTransactionsListViewController(personalizationEventSource: self.personalizationEventSource)
         }
-//        self.categoryContainerCoordinator?.navigateToTransactionsListViewController(personalizationEventSource: self.personalizationEventSource)
     }
 }

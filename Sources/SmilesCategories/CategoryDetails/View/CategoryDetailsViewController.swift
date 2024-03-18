@@ -24,7 +24,7 @@ enum OfferSort: String, CaseIterable {
     case dealVouchers = "DealVouchers"
 }
 
-class CategoryDetailsViewController: UIViewController, SmilesCoordinatorBoard {
+public class CategoryDetailsViewController: UIViewController, SmilesCoordinatorBoard {
     var didScroll:(UIScrollView)->Void = {_ in}
     
     // MARK: -- Outlets
@@ -80,7 +80,7 @@ class CategoryDetailsViewController: UIViewController, SmilesCoordinatorBoard {
     weak var delegate: SmilesCategoriesDelegate?
     private var dependencies: SmilesCategoryDetailsDependencies?
     
-    init(dependencies: SmilesCategoryDetailsDependencies) {
+    public init(dependencies: SmilesCategoryDetailsDependencies) {
         super.init(nibName: nil, bundle: nil)
         self.dependencies = dependencies
         delegate = dependencies.delegate
@@ -92,7 +92,7 @@ class CategoryDetailsViewController: UIViewController, SmilesCoordinatorBoard {
     
     // MARK: -- View LifeCycle
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         if let subCategoryId {
             arraySelectedSubCategoryTypes = ["\(subCategoryId)"]
@@ -110,12 +110,12 @@ class CategoryDetailsViewController: UIViewController, SmilesCoordinatorBoard {
         offersCategoryId = ((self.categoryId == 21) || (self.categoryId == 22)) ? 9 : self.categoryId
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         delegate?.currentPresentedViewController(viewController: self)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
@@ -169,14 +169,14 @@ class CategoryDetailsViewController: UIViewController, SmilesCoordinatorBoard {
                     self?.configureOffersCategoryListData(with: offersCategoryListResponse)
                     
                     // Popular Restaurants Success
-                case .fetchPopularRestaurantsDidSucceed(let popularRestaurantsResponse, let menuItemType): break
-                    //                    if menuItemType == nil {
-                    ////                        self?.categoryDetailsCoordinator?.presentRestaurantsList(response: popularRestaurantsResponse, onRestaurantPicked: { restaurant in
-                    ////                            self?.categoryDetailsCoordinator?.navigateToRestaurantDetailVC(restaurant: restaurant, isViewCart: false, recommendationModelEvent: "", personalizationEventSource: self?.personalizationEventSource)
-                    //                        })
-                    //                    } else {
-                    //                        self?.configurePopularRestaurantsData(with: popularRestaurantsResponse)
-                    //                    }
+                case .fetchPopularRestaurantsDidSucceed(let popularRestaurantsResponse, let menuItemType):
+                    if menuItemType == nil {
+                        self?.delegate?.presentRestaurantsList(response: popularRestaurantsResponse, onRestaurantPicked: { restaurant in
+                            self?.delegate?.navigateToRestaurantDetailVC(restaurant: restaurant, isViewCart: false, recommendationModelEvent: "", personalizationEventSource: self?.personalizationEventSource)
+                        })
+                    } else {
+                        self?.configurePopularRestaurantsData(with: popularRestaurantsResponse)
+                    }
                     
                     // Filters Data Binding
                 case .fetchOffersFiltersDidSucceed(let offersFiltersResponse):
@@ -811,7 +811,7 @@ extension CategoryDetailsViewController {
     }
     
     func redirectToSearch() {
-        delegate?.navigateToGlobalSearchVC()
+        //delegate?.navigateToGlobalSearchVC()
     }
     
     func presentCategoriesPicker(groups:[GroupItemCategoryDetails]){
@@ -849,7 +849,7 @@ extension CategoryDetailsViewController {
 }
 
 extension CategoryDetailsViewController: SelectedFiltersDelegate {
-    func didSetFilters(_ filters: [FilterValue]) {
+    public func didSetFilters(_ filters: [FilterValue]) {
         arraySelectedSubCategoryTypes.removeAll()
         filtersSavedList = []
         
@@ -872,7 +872,7 @@ extension CategoryDetailsViewController: SelectedFiltersDelegate {
         self.input.send(.getOffersCategoryList(pageNo: 1, categoryId: "\(self.offersCategoryId)", searchByLocation: false, sortingType: sortingType, subCategoryTypeIdsList: arraySelectedSubCategoryTypes, themeId: (themeId != nil) ? "\(self.themeId!)" : nil))
     }
     
-    func didSetFilterResponse(_ data: Data?) {
+    public func didSetFilterResponse(_ data: Data?) {
         selectedFiltersResponse = data
     }
     
@@ -889,7 +889,7 @@ extension CategoryDetailsViewController: SelectedFiltersDelegate {
 }
 
 extension CategoryDetailsViewController: SelectedSortDelegate {
-    func didSetSort(sortBy: FilterDO) {
+    public func didSetSort(sortBy: FilterDO) {
         viewModel.setSelectedSortingParam(sort: sortBy)
         
         let sortName = sortBy.filterValue
@@ -956,12 +956,12 @@ extension CategoryDetailsViewController {
 
 extension CategoryDetailsViewController: PageSheetDelegate {
     
-    func didSelectLeftButton() {
+    public func didSelectLeftButton() {
         pageSheetView.removeFromSuperview()
         self.consentActionType = nil
     }
     
-    func didSelectRightButton() {
+    public func didSelectRightButton() {
         AppCommonMethods.openExternalUrl(urlString: redirectionURL.asStringOrEmpty()) { [weak self] _ in
             guard let self else { return }
             self.consentActionType = nil
