@@ -41,7 +41,7 @@ class CategoryContainerViewController: UIViewController, SmilesCoordinatorBoard 
     var isPayBillsView = true
     var didLoadView: ((UIView) -> Void)?
     
-    weak var delegate: SmilesCategoriesContainerDelegate?
+    weak var delegate: SmilesCategoriesDelegate?
     
     // MARK: -- View LifeCycle
     

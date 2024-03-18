@@ -32,7 +32,7 @@ public struct CategoriesConfigurator {
  
 public struct SmilesCategoryContainerDependencies {
     
-    let deelegate: SmilesCategoriesContainerDelegate?
+    let deelegate: SmilesCategoriesDelegate?
     let categoryId: Int 
     let shouldShowBills: Bool
     let sortType: String
@@ -43,7 +43,7 @@ public struct SmilesCategoryContainerDependencies {
 
 public struct SmilesCategoryDetailsDependencies {
     
-    let delegate: SmilesCategoriesContainerDelegate?
+    let delegate: SmilesCategoriesDelegate?
     var consentConfigList : [ConsentConfigDO]?
     var categoryId: Int?
     var themeId: Int?
@@ -54,7 +54,7 @@ public struct SmilesCategoryDetailsDependencies {
     var personalizationEventSource: String?
 }
 
-public protocol SmilesCategoriesContainerDelegate: AnyObject {
+public protocol SmilesCategoriesDelegate: AnyObject {
     func smilesCategoriesAnalytics(event: EventType, parameters: [String: String]?)
     func navigateToGlobalSearchVC()
     func navigateToUpdateLocationVC()

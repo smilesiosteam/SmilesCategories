@@ -77,7 +77,7 @@ class CategoryDetailsViewController: UIViewController, SmilesCoordinatorBoard {
     var consentActionType: ConsentActionType?
     
     var selectedFiltersResponse: Data?
-    weak var delegate: SmilesCategoriesContainerDelegate?
+    weak var delegate: SmilesCategoriesDelegate?
     private var dependencies: SmilesCategoryDetailsDependencies?
     
     init(dependencies: SmilesCategoryDetailsDependencies) {
