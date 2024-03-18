@@ -68,7 +68,7 @@ public class CategoryDetailsViewController: UIViewController, SmilesCoordinatorB
     var didSelectFilterOrSort = false
     var isFromViewAll: Bool?
     var mutatingSectionDetails = [SectionDetailDO]()
-    
+    var consentConfigList: [ConsentConfigDO]?
     var personalizationEventSource: String?
     
     var selectedSortIndex = -1
@@ -83,7 +83,15 @@ public class CategoryDetailsViewController: UIViewController, SmilesCoordinatorB
     public init(dependencies: SmilesCategoryDetailsDependencies) {
         super.init(nibName: nil, bundle: nil)
         self.dependencies = dependencies
-        delegate = dependencies.delegate
+        self.delegate = dependencies.delegate
+        self.consentConfigList = dependencies.consentConfigList
+        self.categoryId = dependencies.categoryId ?? 0
+        self.themeId = dependencies.themeId
+        self.subCategoryId = dependencies.subCategoryId
+        self.didScroll = dependencies.didScroll
+        self.isFromViewAll = dependencies.isFromViewAll
+        self.personalizationEventSource = dependencies.personalizationEventSource
+        
     }
     
     required init?(coder: NSCoder) {
