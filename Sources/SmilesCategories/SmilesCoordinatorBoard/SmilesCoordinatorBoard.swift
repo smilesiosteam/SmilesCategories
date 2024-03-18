@@ -18,7 +18,7 @@ public protocol SmilesCoordinatorBoard : UIViewController {
 extension SmilesCoordinatorBoard {
 
     public static func instantiateFromStoryBoard(withStoryBoard name:String) -> Self {
-        let storyboard = UIStoryboard(name: name, bundle: Bundle.main)
+        let storyboard = UIStoryboard(name: name, bundle: Bundle.module)
         let id = String(describing: self)
         return storyboard.instantiateViewController(withIdentifier: id) as! Self
     }
