@@ -164,8 +164,7 @@ public class CategoryDetailsViewController: UIViewController, SmilesCoordinatorB
                     self?.configureItemCategoriesData(with: itemCategoriesResponse)
                     
                 case .fetchTopOffersDidSucceed(let topOffersResponse):
-//                    self?.configureBannersData(with: topOffersResponse, sectionIdentifier: .TOPBANNERS)
-                    break
+                    self?.configureBannersData(with: topOffersResponse, sectionIdentifier: .TOPBANNERS)
                 case .fetchNearbyOffersDidSucceed(let nearbyOffersResponse):
                     self?.configureNearbyOffersData(with: nearbyOffersResponse)
                     
@@ -347,12 +346,12 @@ public class CategoryDetailsViewController: UIViewController, SmilesCoordinatorB
                     if let response = GetTopOffersResponseModel.fromFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forTopOffers: response, data:"#FFFFFF", isDummy: true, completion: nil)
                     }
-//                    self.input.send(.getSubscriptionBanner(menuItemType: nil, bannerType: "HOME", categoryId: self.categoryId, bannerSubType: "SUBSCRIPTION_BANNERS"))
+                    self.input.send(.getSubscriptionBanner(menuItemType: nil, bannerType: "HOME", categoryId: self.categoryId, bannerSubType: "SUBSCRIPTION_BANNERS"))
                 case .SUBSCRIPTIONBANNERSV2:
                     if let response = GetTopOffersResponseModel.fromFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.makeSubscription(forTopOffers: response, data:"#FFFFFF", isDummy: true, completion: nil)
                     }
-//                    self.input.send(.getSubscriptionBanner(menuItemType: nil, bannerType: "HOME", categoryId: nil, bannerSubType: "SUBSCRIPTION_BANNERS_V2"))
+                    self.input.send(.getSubscriptionBanner(menuItemType: nil, bannerType: "HOME", categoryId: nil, bannerSubType: "SUBSCRIPTION_BANNERS_V2"))
                 case .OFFERLISTING:
                     showShimmer(identifier: .OFFERLISTING)
                     self.input.send(.getOffersCategoryList(pageNo: 1, categoryId: "\(self.offersCategoryId)", searchByLocation: false, sortingType: sortingType, subCategoryTypeIdsList: arraySelectedSubCategoryTypes, themeId: (themeId != nil) ? "\(self.themeId!)" : nil))

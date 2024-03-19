@@ -16,7 +16,7 @@ import AppHeader
 
 public class CategoryContainerViewController: UIViewController, SmilesCoordinatorBoards {
     
-    @IBOutlet weak var topHeaderView: AppHeaderView!
+    @IBOutlet public weak var topHeaderView: AppHeaderView!
     @IBOutlet public weak var containerView: UIView!
     // MARK: -- Variables
     private let input: PassthroughSubject<CategoryContainerViewModel.Input, Never> = .init()
