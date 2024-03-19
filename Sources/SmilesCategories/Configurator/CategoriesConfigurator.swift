@@ -22,9 +22,14 @@ public struct CategoriesConfigurator {
     public static func create(type: ConfiguratorType) -> UIViewController {
         switch type {
         case .categoriesContainerVC(let dependencies):
-            return CategoryContainerViewController(dependencies: dependencies)
+            let categoryContainerViewController = CategoryContainerViewController.instantiateFromStoryBoard(withStoryBoard: "CategoryContainer")
+            categoryContainerViewController.initialiser(dependencies: dependencies)
+            return categoryContainerViewController
+            
         case .categoryDetailsViewController(let dependencies):
-            return CategoryDetailsViewController(dependencies: dependencies)
+            let categoryContainerViewController = CategoryDetailsViewController.instantiateFromStoryBoard(withStoryBoard: "CategoryDetails")
+            categoryContainerViewController.initialiser(dependencies: dependencies)
+            return categoryContainerViewController
         }
     }
     

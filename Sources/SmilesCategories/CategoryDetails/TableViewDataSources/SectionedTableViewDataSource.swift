@@ -15,6 +15,7 @@ import SmilesOffers
 import SmilesBanners
 import SmilesFilterAndSort
 import UIKit
+import SmilesReusableComponents
 
 
 extension TableViewDataSource where Model == GetCollectionsResponseModel {

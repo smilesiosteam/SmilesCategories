@@ -9,13 +9,13 @@
 import Foundation
 import UIKit
 
-public protocol SmilesCoordinatorBoard : UIViewController {
+public protocol SmilesCoordinatorBoards : UIViewController {
 
     static func instantiateFromStoryBoard(withStoryBoard name:String) -> Self
 
 }
 
-extension SmilesCoordinatorBoard {
+extension SmilesCoordinatorBoards {
 
     public static func instantiateFromStoryBoard(withStoryBoard name:String) -> Self {
         let storyboard = UIStoryboard(name: name, bundle: Bundle.module)
