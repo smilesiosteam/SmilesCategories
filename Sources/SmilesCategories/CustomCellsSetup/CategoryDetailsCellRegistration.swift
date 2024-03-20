@@ -16,7 +16,7 @@ import SmilesReusableComponents
 import UIKit
 
 
-struct FoodOrderHomeCellRegistration: CellRegisterable {
+struct CategoryDetailsCellRegistration: CellRegisterable {
     
     func register(for tableView: UITableView) {
         
@@ -41,5 +41,11 @@ struct FoodOrderHomeCellRegistration: CellRegisterable {
         tableView.registerCellFromNib(SubscriptionPromotionActionTableViewCell.self, bundle: SubscriptionPromotionActionTableViewCell.module)
 
         tableView.registerCellFromNib(NoFilteredResultFoundTVC.self, bundle: NoFilteredResultFoundTVC.module)
+        
+        tableView.registerCellFromNib(ItemCategoryTableViewCell.self, bundle: ItemCategoryTableViewCell.module)
+        
+        tableView.registerCellFromNib(CBDCreditCardBannerTableViewCell.self, bundle: CBDCreditCardBannerTableViewCell.module)
+       
+        tableView.registerCellFromNib(OcassionThemeCell.self, bundle: OcassionThemeCell.module)
     }
 }

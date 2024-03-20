@@ -384,7 +384,7 @@ public class CategoryDetailsViewController: UIViewController, SmilesCoordinatorB
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.estimatedSectionHeaderHeight = 1
         
-        let customizable: CellRegisterable? = DashboardCellRegistration()
+        let customizable: CellRegisterable? = CategoryDetailsCellRegistration()
         customizable?.register(for: self.tableView)
         
         // ----- Tableview section header hide in case of tableview mode Plain ---
