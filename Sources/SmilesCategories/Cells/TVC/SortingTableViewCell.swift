@@ -11,21 +11,21 @@ import SmilesUtilities
 import SmilesOffers
 import UIKit
 
-enum SortingChoice: Int {
+public enum SortingChoice: Int {
     case SingleSelection
     case MultiSelection
 }
 
-class SortingTableViewCellModel {
-    var title: String
-    var mode: SortingChoice = .SingleSelection
-    var isSelected = false
-    var multiChoiceUpTo = 0
-    var isSelectionMandatory = false
-    var sortingModel: FilterDO?
-    var bottomLineHidden = false
+public class SortingTableViewCellModel {
+   public var title: String
+   public var mode: SortingChoice = .SingleSelection
+   public var isSelected = false
+   public var multiChoiceUpTo = 0
+   public var isSelectionMandatory = false
+   public var sortingModel: FilterDO?
+   public var bottomLineHidden = false
     
-    init(title: String, mode: SortingChoice, isSelected: Bool, multiChoiceUpTo: Int, isSelectionMandatory: Bool, sortingModel: FilterDO, bottomLineHidden: Bool? = false) {
+    public init(title: String, mode: SortingChoice, isSelected: Bool, multiChoiceUpTo: Int, isSelectionMandatory: Bool, sortingModel: FilterDO, bottomLineHidden: Bool? = false) {
         self.title = title
         self.mode = mode
         self.isSelected = isSelected
@@ -36,17 +36,17 @@ class SortingTableViewCellModel {
     }
 }
 
-class MyFiltersTableViewCellModel {
-    var title: String
-    var type: String
-    var mode: SortingChoice = .SingleSelection
-    var isSelected = false
-    var model: Any?
-    var font: UIFont = .montserratRegularFont(size: 15)
-    var color: UIColor = .appGreyColor_128
-    var selectedFont: UIFont = .montserratSemiBoldFont(size: 15)
+public class MyFiltersTableViewCellModel {
+    public var title: String
+    public var type: String
+    public var mode: SortingChoice = .SingleSelection
+    public var isSelected = false
+    public var model: Any?
+    public var font: UIFont = .montserratRegularFont(size: 15)
+    public var color: UIColor = .appGreyColor_128
+    public var selectedFont: UIFont = .montserratSemiBoldFont(size: 15)
     
-    init(title: String, type: String = "", mode: SortingChoice, isSelected: Bool, multiChoiceUpTo: Int, model: Any?,font: UIFont = .montserratRegularFont(size: 15), color: UIColor = .appGreyColor_128, selectedFont: UIFont = .montserratSemiBoldFont(size: 15)) {
+    public init(title: String, type: String = "", mode: SortingChoice, isSelected: Bool, multiChoiceUpTo: Int, model: Any?,font: UIFont = .montserratRegularFont(size: 15), color: UIColor = .appGreyColor_128, selectedFont: UIFont = .montserratSemiBoldFont(size: 15)) {
         self.title = title
         self.type = type
         self.mode = mode
@@ -58,8 +58,8 @@ class MyFiltersTableViewCellModel {
     }
 }
 
-class SortingTableViewCell: SuperTableViewCell {
-    var modelObject: SortingTableViewCellModel?
+public class SortingTableViewCell: SuperTVC {
+   public var modelObject: SortingTableViewCellModel?
     
     @IBOutlet var titleLabel: UILabel! {
         didSet {
@@ -70,11 +70,11 @@ class SortingTableViewCell: SuperTableViewCell {
     @IBOutlet var selectionImageView: UIImageView!
     @IBOutlet var bottomLineView: UIView!
 
-    override func awakeFromNib() {
+    public override func awakeFromNib() {
         super.awakeFromNib()
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    public override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
@@ -112,7 +112,7 @@ class SortingTableViewCell: SuperTableViewCell {
         }
     }
     
-    static func rowModel(model: SortingTableViewCellModel?) -> BaseRowModel {
+    public static func rowModel(model: SortingTableViewCellModel?) -> BaseRowModel {
         let rowModel = BaseRowModel()
         rowModel.rowCellIdentifier = "SortingTableViewCell"
         rowModel.rowHeight = UITableView.automaticDimension
@@ -121,7 +121,7 @@ class SortingTableViewCell: SuperTableViewCell {
         return rowModel
     }
     
-    static func rowModel(model: MyFiltersTableViewCellModel?) -> BaseRowModel {
+    public static func rowModel(model: MyFiltersTableViewCellModel?) -> BaseRowModel {
         let rowModel = BaseRowModel()
         rowModel.rowCellIdentifier = "SortingTableViewCell"
         rowModel.rowHeight = UITableView.automaticDimension

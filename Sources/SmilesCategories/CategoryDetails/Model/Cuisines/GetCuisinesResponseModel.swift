@@ -10,16 +10,16 @@ import Foundation
 
 public struct GetCuisinesResponseModel: Codable {
     
-    let cuisines: [CuisineDO]?
+    public let cuisines: [CuisineDO]?
     
-    struct CuisineDO: Codable {
+   public struct CuisineDO: Codable {
         // MARK: - Model Variables
         
-        let title: String?
-        let description: String?
-        let imageUrl: String?
-        let iconUrl: String?
-        let redirectionUrl: String?
+       public let title: String?
+       public let description: String?
+       public let imageUrl: String?
+       public let iconUrl: String?
+       public let redirectionUrl: String?
         
     }
 }

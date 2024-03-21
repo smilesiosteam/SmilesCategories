@@ -12,7 +12,7 @@ import SmilesBanners
 import LottieAnimationManager
 import SmilesSharedServices
 
-class SubscriptionPromotionActionTableViewCell: UITableViewCell {
+public class SubscriptionPromotionActionTableViewCell: UITableViewCell {
     
     @IBOutlet weak var parentView: UIView!
     @IBOutlet weak var lottieAnimationView: UIView!
@@ -39,7 +39,7 @@ class SubscriptionPromotionActionTableViewCell: UITableViewCell {
     public var topAdsCallBack: ((GetTopAdsResponseModel.TopAdsDto.TopAd) -> ())?
     weak var timer: Timer?
     public static let module = Bundle.module
-    override func awakeFromNib() {
+    public override func awakeFromNib() {
         super.awakeFromNib()
         
         self.lottieAnimationView.layer.cornerRadius = 16.0
@@ -52,7 +52,7 @@ class SubscriptionPromotionActionTableViewCell: UITableViewCell {
         setupUI()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    public override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

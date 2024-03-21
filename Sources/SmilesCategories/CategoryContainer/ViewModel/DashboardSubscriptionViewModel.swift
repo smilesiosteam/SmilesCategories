@@ -12,15 +12,15 @@ import NetworkingLayer
 import SmilesBanners
 import SmilesUtilities
 
-class DashboardSubscriptionViewModel: NSObject {
+public class DashboardSubscriptionViewModel: NSObject {
 
     // MARK: - INPUT. View event methods
-    enum Input {
+    public enum Input {
         case getSubscriptionBanner(menuItemType: String?, bannerType: String?, categoryId: Int?, bannerSubType: String?)
        // case getSubscriptionV2Banner(menuItemType: String?, bannerType: String?, categoryId: Int?, bannerSubType: String?)
     }
     
-    enum Output {
+    public enum Output {
         case fetchSubscriptionBannersDidSucceed(response: GetTopOffersResponseModel)
         case fetchSubscriptionBannersDidFail(error: Error)
     }
@@ -34,7 +34,7 @@ class DashboardSubscriptionViewModel: NSObject {
 }
 
 // MARK: - INPUT. View event methods
-extension DashboardSubscriptionViewModel {
+public extension DashboardSubscriptionViewModel {
     func transform(input: AnyPublisher<Input, Never>) -> AnyPublisher<Output, Never> {
         output = PassthroughSubject<Output, Never>()
         input.sink { [weak self] event in

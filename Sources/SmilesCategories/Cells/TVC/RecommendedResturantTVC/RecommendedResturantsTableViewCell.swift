@@ -9,12 +9,12 @@
 import UIKit
 import SmilesUtilities
 
-class RecommendedResturantsTableViewCell: UITableViewCell {
+public class RecommendedResturantsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var collectionsData: [Restaurant]?{
+    public var collectionsData: [Restaurant]?{
         didSet{
             self.collectionView?.reloadData()
         }
@@ -22,7 +22,7 @@ class RecommendedResturantsTableViewCell: UITableViewCell {
     
     var callBack: ((Restaurant) -> ())?
     public static let module = Bundle.module
-    override func awakeFromNib() {
+    public override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         collectionView.register(UINib(nibName: String(describing: RecommendedResturantCollectionViewCell.self), bundle: .module), forCellWithReuseIdentifier: String(describing: RecommendedResturantCollectionViewCell.self))
@@ -31,13 +31,13 @@ class RecommendedResturantsTableViewCell: UITableViewCell {
         collectionView.collectionViewLayout = setupCollectionViewLayout()
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    public override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
     }
     
-    func setupCollectionViewLayout() ->  UICollectionViewCompositionalLayout {
+    public func setupCollectionViewLayout() ->  UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionNumber, env) -> NSCollectionLayoutSection? in
             
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -60,11 +60,11 @@ class RecommendedResturantsTableViewCell: UITableViewCell {
 }
 
 extension RecommendedResturantsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return collectionsData?.count ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if let data = collectionsData?[indexPath.row] {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecommendedResturantCollectionViewCell", for: indexPath) as? RecommendedResturantCollectionViewCell else {return UICollectionViewCell()}
@@ -76,7 +76,7 @@ extension RecommendedResturantsTableViewCell: UICollectionViewDelegate, UICollec
         return UICollectionViewCell()
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let data = collectionsData?[indexPath.row] {
             callBack?(data)
         }

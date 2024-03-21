@@ -34,7 +34,7 @@ public enum FoodOrderHomeEndPoints: String, CaseIterable {
 }
 
 extension FoodOrderHomeEndPoints {
-    var serviceEndPoints: String {
+    public var serviceEndPoints: String {
         switch self {
         case .cuisines:
             return "home/v1/cuisines"

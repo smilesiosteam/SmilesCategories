@@ -44,7 +44,7 @@ struct CategoryDetailsCellRegistration: CellRegisterable {
         
         tableView.registerCellFromNib(ItemCategoryTableViewCell.self, bundle: ItemCategoryTableViewCell.module)
         
-        tableView.registerCellFromNib(CBDCreditCardBannerTableViewCell.self, bundle: CBDCreditCardBannerTableViewCell.module)
+        tableView.registerCellFromNib(CBDCreditCardBannerTVC.self, bundle: CBDCreditCardBannerTVC.module)
        
         tableView.registerCellFromNib(OcassionThemeCell.self, bundle: OcassionThemeCell.module)
     }

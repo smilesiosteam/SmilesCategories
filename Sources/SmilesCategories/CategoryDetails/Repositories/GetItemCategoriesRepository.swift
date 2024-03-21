@@ -15,19 +15,19 @@ protocol GetItemCategoriesServiceable {
     func getItemCategoriesService(request: ItemCategoriesRequestModel) -> AnyPublisher<ItemCategoriesResponseModel, NetworkError>
 }
 
-class GetItemCategoriesRepository: GetItemCategoriesServiceable {
+public class GetItemCategoriesRepository: GetItemCategoriesServiceable {
     
     private var networkRequest: Requestable
 //    private var environment: Environment?
     private var endPoint: DashboardRevampEndPoints
 
   // inject this for testability
-    init(networkRequest: Requestable, endPoint: DashboardRevampEndPoints) {
+    public init(networkRequest: Requestable, endPoint: DashboardRevampEndPoints) {
         self.networkRequest = networkRequest
         self.endPoint = endPoint
     }
   
-    func getItemCategoriesService(request: ItemCategoriesRequestModel) -> AnyPublisher<ItemCategoriesResponseModel, NetworkError> {
+    public func getItemCategoriesService(request: ItemCategoriesRequestModel) -> AnyPublisher<ItemCategoriesResponseModel, NetworkError> {
         let endPoint = ItemCategoriesRequestBuilder.getItemCategories(request: request)
         let request = endPoint.createRequest(
             endPoint: self.endPoint

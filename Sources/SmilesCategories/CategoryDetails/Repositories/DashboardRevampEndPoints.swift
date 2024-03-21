@@ -29,7 +29,7 @@ public enum DashboardRevampEndPoints: String, CaseIterable {
 }
 
 extension DashboardRevampEndPoints {
-    var serviceEndPoints: String {
+    public var serviceEndPoints: String {
         switch self {
         case .itemCategories:
             return "home/v2/item-categories"

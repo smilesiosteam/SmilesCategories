@@ -12,14 +12,14 @@ import NetworkingLayer
 import CoreLocation
 import SmilesUtilities
 
-class NearbyOffersViewModel: NSObject {
+public class NearbyOffersViewModel: NSObject {
     
     // MARK: - INPUT. View event methods
-    enum Input {
+    public enum Input {
         case getNearbyOffers(pageNo: Int?)
     }
     
-    enum Output {
+    public enum Output {
         case fetchNearbyOffersDidSucceed(response: NearbyOffersResponseModel)
         case fetchNearbyOffersDidFail(error: Error)
     }
@@ -29,7 +29,7 @@ class NearbyOffersViewModel: NSObject {
     private var cancellables = Set<AnyCancellable>()
 }
 
-extension NearbyOffersViewModel {
+public extension NearbyOffersViewModel {
     func transform(input: AnyPublisher<Input, Never>) -> AnyPublisher<Output, Never> {
         output = PassthroughSubject<Output, Never>()
         input.sink { [weak self] event in

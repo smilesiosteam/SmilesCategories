@@ -11,7 +11,7 @@ import SmilesUtilities
 import SmilesLanguageManager
 
 
-@objc class CBDCreditCardBannerTableViewCell: SuperTableViewCell {
+@objc class CBDCreditCardBannerTVC: SuperTVC {
     
     @IBOutlet weak var img_icon: UIImageView!
     

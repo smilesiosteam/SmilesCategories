@@ -10,13 +10,13 @@ import Foundation
 import SmilesUtilities
 
 public struct GetPopularRestaurantsResponseModel: Codable {
-    var restaurants: [Restaurant]?
-    var isLastPageReached: Bool?
-    var sectionName: String?
-    var sectionDescription: String?
-    var eventName: String?
+   public var restaurants: [Restaurant]?
+   public var isLastPageReached: Bool?
+   public var sectionName: String?
+   public var sectionDescription: String?
+   public var eventName: String?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case restaurants
         case isLastPageReached
         case sectionName

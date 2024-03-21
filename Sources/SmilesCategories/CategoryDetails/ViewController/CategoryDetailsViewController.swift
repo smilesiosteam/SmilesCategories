@@ -150,8 +150,8 @@ public class CategoryDetailsViewController: UIViewController, SmilesCoordinatorB
                     
                     // Stories Success
                 case .fetchStoriesDidSucceed(let storiesResponse):
-                    self?.configureStoriesData(with: storiesResponse)
-                    
+//                    self?.configureStoriesData(with: storiesResponse)
+                    break
                     // Subscription Success
                 case .fetchSubscriptionBannerDidSucceed(let subscriptionBannerResponse):
                     
@@ -331,7 +331,7 @@ public class CategoryDetailsViewController: UIViewController, SmilesCoordinatorB
                     if let stories = Stories.fromFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forStories: stories, data:"#FFFFFF", isDummy:true, onClick: nil)
                     }
-                    self.input.send(.getStories(categoryID: element.categoryId ?? -1))
+//                    self.input.send(.getStories(categoryID: element.categoryId ?? -1))
                 case .DODLISTING:
                     if let nearbyOffers = [OfferDO].fromFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forNearbyOffers: nearbyOffers, data: "#FFFFFF", isDummy: true, completion: nil)

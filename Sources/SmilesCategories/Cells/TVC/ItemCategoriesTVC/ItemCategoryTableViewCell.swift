@@ -8,13 +8,13 @@
 
 import UIKit
 
-class ItemCategoryTableViewCell: UITableViewCell {
+public class ItemCategoryTableViewCell: UITableViewCell {
     
     @IBOutlet weak var mainVuHgt: NSLayoutConstraint?
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var collectionsData: [HomeItemCategoryDetails]? {
+    public var collectionsData: [HomeItemCategoryDetails]? {
         didSet {
             collectionView?.reloadData()
             layoutIfNeeded()
@@ -24,7 +24,7 @@ class ItemCategoryTableViewCell: UITableViewCell {
     public static let module = Bundle.module
     var callBack: ((HomeItemCategoryDetails) -> ())?
     var verticalLayouting = false
-    override func awakeFromNib() {
+    public override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         collectionView.register(UINib(nibName: String(describing: ItemCategoryCollectionViewCell.self), bundle: .module), forCellWithReuseIdentifier: String(describing: ItemCategoryCollectionViewCell.self))
@@ -33,7 +33,7 @@ class ItemCategoryTableViewCell: UITableViewCell {
         collectionView.collectionViewLayout = setupCollectionViewLayout()
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    public override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
@@ -80,11 +80,11 @@ class ItemCategoryTableViewCell: UITableViewCell {
 }
 
 extension ItemCategoryTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return collectionsData?.count ?? 0
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let data = collectionsData?[indexPath.row] {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ItemCategoryCollectionViewCell", for: indexPath) as? ItemCategoryCollectionViewCell else { return UICollectionViewCell() }
             cell.configureCellWithData(category: data)
@@ -94,7 +94,7 @@ extension ItemCategoryTableViewCell: UICollectionViewDelegate, UICollectionViewD
         return UICollectionViewCell()
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let data = collectionsData?[indexPath.row] {
             callBack?(data)
         }

@@ -11,14 +11,14 @@ import Combine
 import NetworkingLayer
 import SmilesUtilities
 
-class ItemCategoriesViewModel: NSObject {
+public class ItemCategoriesViewModel: NSObject {
     
     // MARK: - INPUT. View event methods
-    enum Input {
+    public enum Input {
         case getItemCategories
     }
     
-    enum Output {
+    public enum Output {
         case fetchItemCategoriesDidSucceed(response: ItemCategoriesResponseModel)
         case fetchItemCategoriesDidFail(error: Error)
     }
@@ -28,7 +28,7 @@ class ItemCategoriesViewModel: NSObject {
     private var cancellables = Set<AnyCancellable>()
 }
 
-extension ItemCategoriesViewModel {
+public extension ItemCategoriesViewModel {
     func transform(input: AnyPublisher<Input, Never>) -> AnyPublisher<Output, Never> {
         output = PassthroughSubject<Output, Never>()
         input.sink { [weak self] event in

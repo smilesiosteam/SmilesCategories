@@ -9,15 +9,15 @@
 import Foundation
 
 public struct ItemCategoriesResponseModel: Codable {
-    var extTransactionId: String?
-    var itemCategoriesDetails: [HomeItemCategoryDetails]?
+    public var extTransactionId: String?
+    public var itemCategoriesDetails: [HomeItemCategoryDetails]?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case extTransactionId
         case itemCategoriesDetails
     }
     
-    init() {
+    public init() {
         
     }
     

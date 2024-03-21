@@ -10,10 +10,10 @@ import Foundation
 import SmilesOffers
 
 public struct NearbyOffersResponseModel: Codable {
-    let lifestyleSubscriberFlag: Bool?
-    let umOffers: [OfferDO]?
-    
-    enum CodingKeys: String, CodingKey {
+    public let lifestyleSubscriberFlag: Bool?
+    public let umOffers: [OfferDO]?
+     
+    public enum CodingKeys: String, CodingKey {
         case lifestyleSubscriberFlag = "lifestyleSubscriberFlag"
         case umOffers = "UMOffers"
     }

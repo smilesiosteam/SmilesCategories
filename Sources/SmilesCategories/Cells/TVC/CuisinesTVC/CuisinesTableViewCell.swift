@@ -9,24 +9,24 @@
 import UIKit
 import SkeletonView
 
-enum CusineCases: Int {
+public enum CusineCases: Int {
     case topBrand = 0
     case cuisines = 1
 }
 
-class CuisinesTableViewCell: UITableViewCell {
+public class CuisinesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
-    var collectionsDataCuisine: [GetCuisinesResponseModel.CuisineDO]?{
+    public var collectionsDataCuisine: [GetCuisinesResponseModel.CuisineDO]?{
         didSet{
             self.collectionView?.reloadData()
         }
     }
     var callBack: ((GetCuisinesResponseModel.CuisineDO) -> ())?
     public static let module = Bundle.module
-    override func awakeFromNib() {
+    public override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         collectionView.register(UINib(nibName: String(describing: CuisinesCollectionViewCell.self), bundle: .module), forCellWithReuseIdentifier: String(describing: CuisinesCollectionViewCell.self))
@@ -35,13 +35,13 @@ class CuisinesTableViewCell: UITableViewCell {
         collectionView.collectionViewLayout = setupCollectionViewLayout()
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    public override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         setCollectionViewLayout()
     }
     
@@ -79,11 +79,11 @@ class CuisinesTableViewCell: UITableViewCell {
 }
 
 extension CuisinesTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return collectionsDataCuisine?.count ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if let cuisine = collectionsDataCuisine?[safe: indexPath.row]{
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CuisinesCollectionViewCell", for: indexPath) as? CuisinesCollectionViewCell else {return UICollectionViewCell()}
@@ -95,7 +95,7 @@ extension CuisinesTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
         return UICollectionViewCell()
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let data = collectionsDataCuisine?[indexPath.row] {
             callBack?(data)
         }

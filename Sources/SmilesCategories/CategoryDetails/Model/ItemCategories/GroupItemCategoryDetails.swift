@@ -9,11 +9,11 @@
 import Foundation
 
 public struct GroupItemCategoryDetails: Codable {
-    let groupId: Int?
-    let groupName: String?
-    let groupDesc: String?
-    let iconUrl: String?
-    let itemCategoriesDetails: [HomeItemCategoryDetails]?
+   public let groupId: Int?
+   public let groupName: String?
+   public let groupDesc: String?
+   public let iconUrl: String?
+    public let itemCategoriesDetails: [HomeItemCategoryDetails]?
     
     enum CodingKeys: String, CodingKey {
         case groupId, groupName, groupDesc, iconUrl, itemCategoriesDetails

@@ -8,24 +8,24 @@
 
 import Foundation
 
-struct HomeItemCategoryDetails: Codable {
-    let categoryId: Int?
-    let categoryName: String?
-    let redirectionUrl: String?
-    let categoryIconUrl: String?
-    let animationUrl: String?
-    let ribbonIconUrl: String?
-    let backgroundColor: String?
-    let firebaseEventName: String?
-    let searchTag: String?
-    let prority: Int?
-    let groupItemCategoriesDetails: [GroupItemCategoryDetails]?
+public struct HomeItemCategoryDetails: Codable {
+   public let categoryId: Int?
+   public let categoryName: String?
+   public let redirectionUrl: String?
+   public let categoryIconUrl: String?
+   public let animationUrl: String?
+   public let ribbonIconUrl: String?
+   public let backgroundColor: String?
+   public let firebaseEventName: String?
+   public let searchTag: String?
+   public let prority: Int?
+   public let groupItemCategoriesDetails: [GroupItemCategoryDetails]?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case categoryId, categoryName, redirectionUrl, categoryIconUrl, animationUrl, ribbonIconUrl, backgroundColor, firebaseEventName, searchTag, prority, groupItemCategoriesDetails
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         categoryId = try values.decodeIfPresent(Int.self, forKey: .categoryId)
         categoryName = try values.decodeIfPresent(String.self, forKey: .categoryName)

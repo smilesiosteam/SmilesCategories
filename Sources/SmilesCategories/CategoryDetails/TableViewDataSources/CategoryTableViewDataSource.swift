@@ -39,7 +39,7 @@ extension TableViewDataSource where Model == GetCollectionsResponseModel {
 
 
 extension TableViewDataSource where Model == GetSectionsResponseModel {
-    static func make(forSections collectionsObject: GetSectionsResponseModel,
+    public static func make(forSections collectionsObject: GetSectionsResponseModel,
                      reuseIdentifier: String = "DeliveryAndPickupTableViewCell", data : String, isDummy:Bool = false, completion: ((RestaurantMenuType) -> ())?) -> TableViewDataSource {
         return TableViewDataSource(
             models: [collectionsObject],
@@ -57,7 +57,7 @@ extension TableViewDataSource where Model == GetSectionsResponseModel {
 
 
 extension TableViewDataSource where Model == GetSubscriptionBannerResponseModel {
-    static func make(forSubscription collectionsObject: GetSubscriptionBannerResponseModel,
+    public static func make(forSubscription collectionsObject: GetSubscriptionBannerResponseModel,
                      reuseIdentifier: String = "SubscriptionTableViewCell", data : String, isDummy:Bool = false) -> TableViewDataSource {
         return TableViewDataSource(
             models: [collectionsObject],
@@ -141,11 +141,11 @@ extension TableViewDataSource where Model == CBDDetailsResponseModel {
     static func make(objects: [CBDDetailsResponseModel]) -> TableViewDataSource {
         return TableViewDataSource(
             models: objects,
-            reuseIdentifier: "CBDCreditCardBannerTableViewCell",
+            reuseIdentifier: "CBDCreditCardBannerTVC",
             data: "#FFFFFF",
             isDummy: false
         ) { (cbdDetails, cell, data, indexPath) in
-            guard let cell = cell as? CBDCreditCardBannerTableViewCell else { return }
+            guard let cell = cell as? CBDCreditCardBannerTVC else { return }
             cell.configure(details: cbdDetails)
         }
     }
@@ -166,7 +166,7 @@ extension TableViewDataSource where Model == NoFilteredResultCellModel {
     
 }
 extension TableViewDataSource where Model == ItemCategoriesResponseModel {
-    static func make(forItemCategories collectionsObject: ItemCategoriesResponseModel,
+   public static func make(forItemCategories collectionsObject: ItemCategoriesResponseModel,
                      reuseIdentifier: String = "ItemCategoryTableViewCell", data: String, isDummy: Bool = false, verticalLayouting: Bool = false, completion: ((HomeItemCategoryDetails) -> ())?) -> TableViewDataSource {
         return TableViewDataSource(
             models: [collectionsObject].filter({$0.itemCategoriesDetails?.count ?? 0 > 0}),
@@ -185,7 +185,7 @@ extension TableViewDataSource where Model == ItemCategoriesResponseModel {
     }
 }
 extension TableViewDataSource where Model == GetPopularRestaurantsResponseModel {
-    static func make(forPopularResturants collectionsObject: GetPopularRestaurantsResponseModel,
+    public static func make(forPopularResturants collectionsObject: GetPopularRestaurantsResponseModel,
                      reuseIdentifier: String = "RecommendedResturantsTableViewCell", data : String, isDummy:Bool = false, completion:((Restaurant, IndexPath?) -> ())?) -> TableViewDataSource {
         return TableViewDataSource(
             models: [collectionsObject].filter({$0.restaurants?.count ?? 0 > 0}),
@@ -203,7 +203,7 @@ extension TableViewDataSource where Model == GetPopularRestaurantsResponseModel 
     }
 }
 extension TableViewDataSource where Model == GetCuisinesResponseModel {
-    static func make(forCuisines collectionsObject: GetCuisinesResponseModel,
+   public static func make(forCuisines collectionsObject: GetCuisinesResponseModel,
                      reuseIdentifier: String = "CuisinesTableViewCell" , data : String, isDummy:Bool = false, completion:((GetCuisinesResponseModel.CuisineDO) -> ())?) -> TableViewDataSource {
         return TableViewDataSource(
             models: [collectionsObject].filter({$0.cuisines?.count ?? 0 > 0}),
@@ -223,7 +223,7 @@ extension TableViewDataSource where Model == GetCuisinesResponseModel {
 }
 
 extension TableViewDataSource where Model == Stories {
-    static func make(forStories collectionsObject: Stories,
+    public static func make(forStories collectionsObject: Stories,
                      reuseIdentifier: String = "StoriesTableViewCell", data : String, isDummy:Bool = false, onClick:((Story) -> ())?) -> TableViewDataSource {
         return TableViewDataSource(
             models: [collectionsObject].filter({$0.stories?.count ?? 0 > 0}),

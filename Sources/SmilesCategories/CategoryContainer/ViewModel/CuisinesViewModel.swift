@@ -11,14 +11,14 @@ import Combine
 import NetworkingLayer
 import SmilesUtilities
 
-class CuisinesViewModel: NSObject {
+public class CuisinesViewModel: NSObject {
     
     // MARK: - INPUT. View event methods
-    enum Input {
+    public enum Input {
         case getCuisines(categoryID: Int, menuItemType: String?)
     }
     
-    enum Output {
+    public enum Output {
         case fetchCuisinesDidSucceed(response: GetCuisinesResponseModel)
         case fetchCuisinesDidFail(error: Error)
     }
@@ -31,7 +31,7 @@ class CuisinesViewModel: NSObject {
 
 // MARK: - INPUT. View event methods
 extension CuisinesViewModel {
-    func transform(input: AnyPublisher<Input, Never>) -> AnyPublisher<Output, Never> {
+    public func transform(input: AnyPublisher<Input, Never>) -> AnyPublisher<Output, Never> {
         output = PassthroughSubject<Output, Never>()
         input.sink { [weak self] event in
             switch event {

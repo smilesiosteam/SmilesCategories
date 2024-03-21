@@ -6,17 +6,17 @@
 import Foundation
 import SmilesUtilities
 
-class SaveUserCbdDetailRequset : Codable {
+public class SaveUserCbdDetailRequset : Codable {
     
-    var contactNumber : String?
-    var dob : String?
-    var email : String?
-    var language : String?
-    var name : String?
-    var nationality : Int?
-    var cbdPromotionType : String?
+    public var contactNumber : String?
+    public var dob : String?
+    public var email : String?
+    public var language : String?
+    public var name : String?
+    public var nationality : Int?
+    public var cbdPromotionType : String?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case contactNumber = "contactNumber"
         case dob = "dob"
         case email = "email"
@@ -26,7 +26,7 @@ class SaveUserCbdDetailRequset : Codable {
         case cbdPromotionType
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         contactNumber = try values.decodeIfPresent(String.self, forKey: .contactNumber)
         dob = try values.decodeIfPresent(String.self, forKey: .dob)
@@ -38,10 +38,10 @@ class SaveUserCbdDetailRequset : Codable {
     }
     
     
-    init() {}
+    public init() {}
     
     
-    func asDictionary(dictionary :[String : Any]) -> [String : Any] {
+    public func asDictionary(dictionary :[String : Any]) -> [String : Any] {
         
         let encoder = DictionaryEncoder()
         guard  let encoded = try? encoder.encode(self) as [String:Any]  else {

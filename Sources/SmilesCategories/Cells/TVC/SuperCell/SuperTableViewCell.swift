@@ -9,8 +9,8 @@
 import UIKit
 import SmilesUtilities
 
-class SuperTableViewCell: UITableViewCell {
-    override func awakeFromNib() {
+public class SuperTVC: UITableViewCell {
+    public override func awakeFromNib() {
         super.awakeFromNib()
 //        CommonMethods.applyLocalizedStrings(toAllViews: self)
 
@@ -18,7 +18,7 @@ class SuperTableViewCell: UITableViewCell {
         setupStyles()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    public override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

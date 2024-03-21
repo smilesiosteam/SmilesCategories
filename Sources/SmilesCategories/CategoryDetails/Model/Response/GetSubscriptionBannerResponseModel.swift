@@ -9,17 +9,17 @@
 import Foundation
 import SmilesUtilities
 
-struct GetSubscriptionBannerResponseModel: Codable {
+public struct GetSubscriptionBannerResponseModel: Codable {
             
-    let isFoodSubscription: Bool?
-    let subscriptionBanner: SubscriptionsBanner?
+    public let isFoodSubscription: Bool?
+    public let subscriptionBanner: SubscriptionsBanner?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case isFoodSubscription
         case subscriptionBanner
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         isFoodSubscription = try values.decodeIfPresent(Bool.self, forKey: .isFoodSubscription)
         subscriptionBanner = try values.decodeIfPresent(SubscriptionsBanner.self, forKey: .subscriptionBanner)

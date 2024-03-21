@@ -8,8 +8,9 @@
 
 import UIKit
 import SmilesUtilities
+import SmilesReusableComponents
 
-class DeliveryAndPickupTableViewCell: UITableViewCell {
+public class DeliveryAndPickupTableViewCell: UITableViewCell {
 
     @IBOutlet weak var bottomCurveView: UIView! {
         didSet {
@@ -27,13 +28,13 @@ class DeliveryAndPickupTableViewCell: UITableViewCell {
     public static let module = Bundle.module
     var menuTypeCallback: ((_ menuItem: RestaurantMenuType) -> ())?
     
-    override func awakeFromNib() {
+    public override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         buttonStatus(isDeliverySelected: true)
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    public override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

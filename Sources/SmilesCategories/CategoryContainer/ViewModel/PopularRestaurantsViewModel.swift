@@ -12,16 +12,16 @@ import NetworkingLayer
 import SmilesSharedServices
 import SmilesUtilities
 
-class PopularRestaurantsViewModel: NSObject {
+public class PopularRestaurantsViewModel: NSObject {
     
     // MARK: - INPUT. View event methods
-    enum Input {
+    public enum Input {
         case getPopularRestaurants(menuItemType: String?, type: PopularRestaurantRequest = .recommended)
         case getPopupPopularRestaurants(menuItemType: String?, type: PopularRestaurantRequest = .popup)
         case updateRestaurantWishlistStatus(operation: Int, restaurantId: String)
     }
     
-    enum Output {
+    public enum Output {
         case fetchPopularRestaurantsDidSucceed(response: GetPopularRestaurantsResponseModel, menuItemType: String?)
         case fetchPopularRestaurantsDidFail(error: Error)
         
@@ -42,7 +42,7 @@ class PopularRestaurantsViewModel: NSObject {
 
 // MARK: - INPUT. View event methods
 extension PopularRestaurantsViewModel {
-    func transform(input: AnyPublisher<Input, Never>) -> AnyPublisher<Output, Never> {
+    public func transform(input: AnyPublisher<Input, Never>) -> AnyPublisher<Output, Never> {
         output = PassthroughSubject<Output, Never>()
         input.sink { [weak self] event in
             switch event {

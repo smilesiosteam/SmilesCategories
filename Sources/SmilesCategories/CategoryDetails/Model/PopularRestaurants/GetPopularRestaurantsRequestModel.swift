@@ -9,12 +9,12 @@
 import Foundation
 import SmilesBaseMainRequestManager
 
-enum PopularRestaurantRequest: String {
+public enum PopularRestaurantRequest: String {
     case recommended
     case popup
 }
 
-class GetPopularRestaurantsRequestModel: SmilesBaseMainRequest {
+public class GetPopularRestaurantsRequestModel: SmilesBaseMainRequest {
     
     // MARK: - Model Variables
     
@@ -41,7 +41,7 @@ class GetPopularRestaurantsRequestModel: SmilesBaseMainRequest {
         case type
     }
     
-    override func encode(to encoder: Encoder) throws {
+    public override func encode(to encoder: Encoder) throws {
         try super.encode(to: encoder)
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.menuItemType, forKey: .menuItemType)

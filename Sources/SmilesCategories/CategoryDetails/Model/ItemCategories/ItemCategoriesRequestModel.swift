@@ -9,15 +9,15 @@
 import Foundation
 import SmilesBaseMainRequestManager
 
-class ItemCategoriesRequestModel: SmilesBaseMainRequest {
-    var isGuestUser: Bool?
+public class ItemCategoriesRequestModel: SmilesBaseMainRequest {
+    public var isGuestUser: Bool?
     
-    init(isGuestUser: Bool?) {
+    public init(isGuestUser: Bool?) {
         super.init()
         self.isGuestUser = isGuestUser
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         fatalError("init(from:) has not been implemented")
     }
     
@@ -25,7 +25,7 @@ class ItemCategoriesRequestModel: SmilesBaseMainRequest {
         case isGuestUser
     }
     
-    override func encode(to encoder: Encoder) throws {
+    public override func encode(to encoder: Encoder) throws {
         try super.encode(to: encoder)
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.isGuestUser, forKey: .isGuestUser)
