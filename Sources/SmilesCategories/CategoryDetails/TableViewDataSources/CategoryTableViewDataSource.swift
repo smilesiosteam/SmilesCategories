@@ -20,7 +20,7 @@ import SmilesReusableComponents
 
 extension TableViewDataSource where Model == GetCollectionsResponseModel {
     static func make(forCollections collectionsObject: GetCollectionsResponseModel,
-                     reuseIdentifier: String = "CollectionsTableViewCell", data : String, isDummy:Bool = false, completion:((GetCollectionsResponseModel.CollectionDO) -> ())?) -> TableViewDataSource {
+                     reuseIdentifier: String = "CollectionsTableViewCell", data : String, isDummy:Bool = false, completion:((CollectionDO) -> ())?) -> TableViewDataSource {
         return TableViewDataSource(
             models: [collectionsObject].filter{$0.collections?.count ?? 0 > 0},
             reuseIdentifier: reuseIdentifier,
@@ -244,7 +244,7 @@ extension TableViewDataSource where Model == Stories {
 
 extension TableViewDataSource where Model == GetTopBrandsResponseModel {
     static func make(forBrands collectionsObject: GetTopBrandsResponseModel,
-                     reuseIdentifier: String = "TopBrandsTableViewCell", data: String, isDummy: Bool = false, topBrandsType: TopBrandsTableViewCell.TopBrandsType, completion:((GetTopBrandsResponseModel.BrandDO) -> ())?) -> TableViewDataSource {
+                     reuseIdentifier: String = "TopBrandsTableViewCell", data: String, isDummy: Bool = false, topBrandsType: TopBrandsTableViewCell.TopBrandsType, completion:((BrandDO) -> ())?) -> TableViewDataSource {
         return TableViewDataSource(
             models: [collectionsObject].filter({$0.brands?.count ?? 0 > 0}),
             reuseIdentifier: reuseIdentifier,
