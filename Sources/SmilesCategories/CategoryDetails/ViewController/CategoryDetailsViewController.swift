@@ -150,7 +150,7 @@ public class CategoryDetailsViewController: UIViewController, SmilesCoordinatorB
                     
                     // Stories Success
                 case .fetchStoriesDidSucceed(let storiesResponse):
-//                    self?.configureStoriesData(with: storiesResponse)
+                    self?.configureStoriesData(with: storiesResponse)
                     break
                     // Subscription Success
                 case .fetchSubscriptionBannerDidSucceed(let subscriptionBannerResponse):
@@ -298,13 +298,13 @@ public class CategoryDetailsViewController: UIViewController, SmilesCoordinatorB
                     break
                     
                 case .TOPBANNERS:
-                    if let response = GetTopOffersResponseModel.fromFile() {
+                    if let response = GetTopOffersResponseModel.fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forTopOffers: response, data:"#FFFFFF", isDummy: true, completion:nil)
                     }
                     self.input.send(.getTopOffers(menuItemType: nil, bannerType: "HOME", categoryId: self.categoryId, bannerSubType: "TOP_BANNERS"))
                     
                 case .ITEMCATEGORIES:
-                    if let response = ItemCategoriesResponseModel.fromFile() {
+                    if let response = ItemCategoriesResponseModel.fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forItemCategories: response, data: "#FFFFFF", isDummy: true, completion: nil)
                     }
                     self.input.send(.getItemCategories)
@@ -313,42 +313,42 @@ public class CategoryDetailsViewController: UIViewController, SmilesCoordinatorB
                     break
                     
                 case .TOPCUISINE:
-                    if let response = GetCuisinesResponseModel.fromFile() {
+                    if let response = GetCuisinesResponseModel.fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forCuisines: response, data:"#FFFFFF", isDummy: true, completion: nil)
                     }
                     self.input.send(.getCuisines(categoryID: self.categoryId, menuItemType: "HOME"))
                 case .RECOMMENDEDLISTING:
-                    if let response = GetPopularRestaurantsResponseModel.fromFile() {
+                    if let response = GetPopularRestaurantsResponseModel.fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forPopularResturants: response, data:"#FFFFFF", isDummy: true, completion: nil)
                     }
                     self.input.send(.getPopularRestaurants(menuItemType: OrderInfoModel.shared.orderTypeDefaultValue.rawValue))
                 case .TOPCOLLECTIONS:
-                    if let response = GetCollectionsResponseModel.fromFile() {
+                    if let response = GetCollectionsResponseModel.fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forCollections: response, data:"#FFFFFF", isDummy: true, completion: nil)
                     }
                     self.input.send(.getCollections(categoryID: self.categoryId, menuItemType: nil))
                 case .STORIES:
-                    if let stories = Stories.fromFile() {
+                    if let stories = Stories.fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forStories: stories, data:"#FFFFFF", isDummy:true, onClick: nil)
                     }
                     self.input.send(.getStories(categoryID: element.categoryId ?? -1))
                 case .DODLISTING:
-                    if let nearbyOffers = [OfferDO].fromFile() {
+                    if let nearbyOffers = [OfferDO].fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forNearbyOffers: nearbyOffers, data: "#FFFFFF", isDummy: true, completion: nil)
                     }
                     self.input.send(.getNearbyOffers(pageNo: 1))
                 case .TOPBRANDS:
-                    if let response = GetTopBrandsResponseModel.fromFile() {
+                    if let response = GetTopBrandsResponseModel.fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forBrands: response, data:"#FFFFFF", isDummy: true, topBrandsType: .foodOrder, completion: nil)
                     }
                     self.input.send(.getTopBrands(categoryID: self.categoryId, menuItemType: nil))
                 case .SUBSCRIPTIONBANNERS:
-                    if let response = GetTopOffersResponseModel.fromFile() {
+                    if let response = GetTopOffersResponseModel.fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forTopOffers: response, data:"#FFFFFF", isDummy: true, completion: nil)
                     }
                     self.input.send(.getSubscriptionBanner(menuItemType: nil, bannerType: "HOME", categoryId: self.categoryId, bannerSubType: "SUBSCRIPTION_BANNERS"))
                 case .SUBSCRIPTIONBANNERSV2:
-                    if let response = GetTopOffersResponseModel.fromFile() {
+                    if let response = GetTopOffersResponseModel.fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.makeSubscription(forTopOffers: response, data:"#FFFFFF", isDummy: true, completion: nil)
                     }
                     self.input.send(.getSubscriptionBanner(menuItemType: nil, bannerType: "HOME", categoryId: nil, bannerSubType: "SUBSCRIPTION_BANNERS_V2"))

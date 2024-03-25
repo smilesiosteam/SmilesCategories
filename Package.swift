@@ -43,7 +43,8 @@ let package = Package(
                 .product(name: "SmilesReusableComponents", package: "SmilesReusableComponents"),
                 .product(name: "SmilesPersonalizationEvent", package: "SmilesPersonalizationEvent")
                 
-               ]),
+               ],
+                resources: [.process("Resources")]),
         .testTarget(
             name: "SmilesCategoriesTests",
             dependencies: ["SmilesCategories"]),
